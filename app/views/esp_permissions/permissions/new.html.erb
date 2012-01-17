@@ -1,0 +1,17 @@
+<h3>
+  <%= t('permissions.You are adding role to') %>
+  <span>
+    <%= @user.name %>
+    &lt;<%= mail_to @user.email, @user.email %>&gt;
+  </span>
+</h3>
+<%= semantic_form_for resource, :url => esp_permissions.user_permissions_path(@user) do |form| %>
+  <%= form.inputs do  %>
+    <%= form.input :context, :collection => current_user.availaible_contexts, :member_label => :context_title, :include_blank => t('permissions.not_selected') %>
+    <%= form.input :role, :as => :select, :collection => Permission.human_enums[:role].invert, :include_blank => t('permissions.not_selected') %>
+  <% end %>
+  <%= form.buttons :class => 'button-group' do %>
+    <li><%= button_tag t('permissions.create'), :class => 'button icon approve' %></li>
+    <li><%= link_to t('permissions.cancel'), esp_permissions.users_path, :class => 'button icon arrowleft'  %></li>
+  <% end %>
+<% end %>

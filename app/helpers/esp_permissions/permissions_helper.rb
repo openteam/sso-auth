@@ -1,4 +1,4 @@
 module EspPermissions
-  module ApplicationHelper
+  module PermissionsHelper
   end
 end

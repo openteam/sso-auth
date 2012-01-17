@@ -1,0 +1,17 @@
+@import "compass/utilities"
+@import "compass/css3"
+
+.pagination
+  span
+    +inline-block
+    border: 1px solid #ccc
+    +border-radius
+    margin: 0 2px
+    &.current,
+    &.gap,
+    a
+      +inline-block
+      padding: 5px 10px
+    &.current,
+    &.gap
+      cursor: default

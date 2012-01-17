@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-
-  mount EspPermissions::Engine => "/esp-permissions"
+  namespace :manage do
+    mount EspPermissions::Engine => "/permissions"
+  end
 end

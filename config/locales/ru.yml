@@ -1,0 +1,24 @@
+ru:
+  activerecord:
+    attributes:
+      permission:
+        context:                Категория
+        role:                   Роль
+
+    models:
+      permission:               Право доступа
+
+  permissions:
+    'Are you sure?':          Вы уверены, в том что хотите удалить запись?
+    'You are sign in as':     Вы вошли как
+    'You are adding role to': Вы добавляете роль для
+    back_to_manage:           Назад в раздел управления контентом
+    cancel:                   Отмена
+    create:                   Создать
+    delete:                   Удалить
+    new:                      Добавить право доступа
+    not_selected:             -- не выбрано --
+    search:                   Поиск
+    show_permissions:         Показать права доступа
+    sign_out:                 Выход
+    title:                    Управление правами доступа
