@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def availaible_contexts
+  def available_contexts
     []
   end
 end

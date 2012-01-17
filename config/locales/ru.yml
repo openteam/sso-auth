@@ -2,11 +2,18 @@ ru:
   activerecord:
     attributes:
       permission:
-        context:                Категория
-        role:                   Роль
+        context:              Категория
+        role:                 Роль
 
     models:
-      permission:               Право доступа
+      permission:             Право доступа
+
+  views:
+    pagination:
+      next:                   "&rarr;"
+      last:                   Последняя страница
+      previous:               "&larr;"
+      first:                  Первая страница
 
   permissions:
     'Are you sure?':          Вы уверены, в том что хотите удалить запись?

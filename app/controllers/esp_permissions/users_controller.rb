@@ -15,7 +15,7 @@ class EspPermissions::UsersController < EspPermissions::ApplicationController
         search_object.pagination = paginate_options
         search_object.results
       else
-        end_of_association_chain
+        end_of_association_chain.per(per_page)
       end
     end
 
@@ -27,7 +27,6 @@ class EspPermissions::UsersController < EspPermissions::ApplicationController
     end
 
     def per_page
-      20
+      10
     end
-
 end
