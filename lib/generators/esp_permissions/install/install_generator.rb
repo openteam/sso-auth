@@ -12,12 +12,12 @@ module EspPermissions
         Time.now.strftime('%Y%m%d%H%M%S')
       end
 
-#      def create_models
-#        template 'model.rb', 'app/models/user.rb'
-#      end
+     def create_models
+       template 'app/models/user.rb'
+     end
 
       def create_migration
-        migration_template 'migration.rb', 'db/migrate/esp_permissions_create_permissions.rb'
+        migration_template 'db/migrate/esp_permissions_create_permissions.rb'
       end
     end
   end
