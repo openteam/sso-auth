@@ -32,10 +32,10 @@
                   <li>
                     <%= permission.context %>
                     <%= link_to t('permissions.delete'),
-                      manage_permissions_permission_path(permission),
+                      esp_permissions.permission_path(permission),
                       :method => :delete,
                       :confirm => t('Are you sure?'),
-                      :class => 'buttton icon remove danger' if can?(:delete, permission) %>
+                      :class => 'buttton icon remove danger' if can?(:destroy, permission) %>
                   </li>
                 <% end %>
               </ul>
