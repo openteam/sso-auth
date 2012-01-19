@@ -1,4 +1,3 @@
-require 'rails/generators'
 require 'rails/generators/migration'
 
 module EspPermissions
@@ -14,9 +13,11 @@ module EspPermissions
 
      def create_models
        template 'app/models/user.rb'
+       template 'app/models/permission.rb'
      end
 
       def create_migration
+        migration_template 'db/migrate/esp_permissions_create_users.rb'
         migration_template 'db/migrate/esp_permissions_create_permissions.rb'
       end
     end

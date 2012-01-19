@@ -1,10 +1,15 @@
 class EspPermissions::UsersController < EspPermissions::ApplicationController
   has_searcher
-  actions :index
+
+  actions :index, :new, :create, :destroy, :search
+
   has_scope :page, :default => 1
 
-  protected
+  def search
+    render :json => Restfulie.at("http://localhost:3000/users?user_search[keywords]=#{URI.escape(params[:term])}").accepts('application/json').get.body and return
+  end
 
+  protected
     def collection
       get_collection_ivar || set_collection_ivar(search_and_paginate_collection)
     end

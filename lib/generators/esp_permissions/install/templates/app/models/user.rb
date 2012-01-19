@@ -1,17 +1,22 @@
 class User < ActiveRecord::Base
   devise :omniauthable, :trackable, :timeoutable
-  attr_accessible :name, :email, :nickname, :first_name, :last_name, :location, :description, :image, :phone, :urls, :raw_info
+  attr_accessible :name, :email, :nickname, :first_name, :last_name, :location, :description, :image, :phone, :urls, :raw_info, :uid
+  validates_presence_of :uid
 
   has_many :permissions
-
-  searchable do
-    text :name, :email, :nickname, :phone
-  end
 
   def self.from_omniauth(hash)
     User.find_or_initialize_by_uid(hash['uid']).tap do |user|
       user.update_attributes hash['info']
     end
+  end
+
+  def full_name
+    nickname || name || "#{last_name} #{first_name}"
+  end
+
+  searchable do
+    text :name, :email, :nickname, :phone, :last_name, :first_name
   end
 
   def available_contexts

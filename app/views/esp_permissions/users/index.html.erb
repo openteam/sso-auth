@@ -6,14 +6,18 @@
     <li><%= button_tag t('permissions.search'), :class => 'button icon search' %></li>
   <% end %>
 <% end %>
-<ul class="collection_list">
-  <% collection.each do | user | %>
-    <li>
-      <div class='name'>
-        <%= user.name %>
-      </div>
 
-      <div class='email'>
+<%= link_to "&#43;#{t('permissions.create_permission')}".html_safe,
+            esp_permissions.new_permission_path,
+            :class => 'new_permission' if can?(:modify, Permission)%>
+
+<ul class='collection_list'>
+  <% collection.each do |user| %>
+    <li>
+      <div class="name">
+        <%= user.full_name %>
+      </div>
+      <div class="email">
         &lt;<%= mail_to user.email, user.email %>&gt;
       </div>
 
@@ -34,7 +38,7 @@
                     <%= link_to t('permissions.delete'),
                       esp_permissions.permission_path(permission),
                       :method => :delete,
-                      :confirm => t('Are you sure?'),
+                      :confirm => t('permissions.Are you sure?'),
                       :class => 'buttton icon remove danger' if can?(:destroy, permission) %>
                   </li>
                 <% end %>
@@ -45,9 +49,9 @@
           <li>Нет прав доступа</li>
         <% end %>
       <% end %>
+
     </li>
   <% end %>
 </ul>
-
 
 <%= paginate collection %>

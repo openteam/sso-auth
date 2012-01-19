@@ -15,6 +15,7 @@ gem 'has_searcher'
 gem 'inherited_resources'
 gem 'jquery-rails'
 gem 'kaminari'
+gem 'restfulie'
 gem 'sso_client'
 gem 'sunspot_rails'
 
