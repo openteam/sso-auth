@@ -7,5 +7,4 @@ class Context < ActiveRecord::Base
   searchable do
     text :title
   end
-
 end
