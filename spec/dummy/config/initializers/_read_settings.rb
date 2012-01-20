@@ -1,4 +1,3 @@
-puts 'read_settings'
 require 'configliere'
 
 Settings.read(Rails.root.join('config', 'settings.yml'))

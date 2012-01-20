@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'README.rdoc']
 
+  s.add_dependency 'ancestry'
   s.add_dependency 'cancan'
   s.add_dependency 'compass', '>= 0.12.alpha.2'
   s.add_dependency 'curb'
@@ -27,10 +28,19 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass'
   s.add_dependency 'sass-rails'
   s.add_dependency 'sso_client'
+  s.add_dependency 'spork', '>= 0.9.0.rc9'
   s.add_dependency 'sunspot_rails'
 
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'guard'
+  s.add_development_dependency 'guard-spork'
+  s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'sunspot_solr'
-  s.add_development_dependency 'uglifier'
+  s.add_development_dependency 'shoulda-matchers'
+  s.add_development_dependency 'forgery'
+  s.add_development_dependency 'ryba'
+  s.add_development_dependency 'fabrication'
   s.add_development_dependency 'therubyracer'
+  s.add_development_dependency 'uglifier'
 end

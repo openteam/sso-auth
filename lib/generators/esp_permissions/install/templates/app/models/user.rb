@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates_presence_of :uid
 
   has_many :permissions
+  has_many :contexts, :through => :permissions
 
   def self.from_omniauth(hash)
     User.find_or_initialize_by_uid(hash['uid']).tap do |user|
@@ -20,7 +21,7 @@ class User < ActiveRecord::Base
   end
 
   def available_contexts
-    []
+    contexts.where(:permissions => {:role => :manager}).map(&:subtree).flatten.uniq
   end
 end
 

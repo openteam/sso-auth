@@ -6,7 +6,7 @@ class EspPermissions::UsersController < EspPermissions::ApplicationController
   has_scope :page, :default => 1
 
   def search
-    render :json => Restfulie.at("http://localhost:3000/users?user_search[keywords]=#{URI.escape(params[:term])}").accepts('application/json').get.body and return
+    render :json => JSON.parse(Curl::Easy.http_get("#{Settings['sso.url']}/users.json?user_search[keywords]=#{URI.escape(params[:term])}").body_str) and return
   end
 
   protected

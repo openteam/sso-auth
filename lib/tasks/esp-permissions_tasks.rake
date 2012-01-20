@@ -8,7 +8,7 @@ namespace :esp_permissions do
     remotes = JSON.parse(Curl::Easy.http_get("#{Settings['blue-pages.url']}/categories/2.json?sync=true").body_str)
     bar = ProgressBar.new(remotes.count)
     remotes.each do | remote |
-      (Context.find(remote['id']) || Context.new).tap do | context |
+      (Context.find_by_id(remote['id']) || Context.new).tap do | context |
         context.update_attributes! remote
       end
       bar.increment!

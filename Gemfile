@@ -5,8 +5,10 @@ source 'http://rubygems.org'
 # development dependencies will be added by default to the :development group.
 gemspec
 
+gem 'ancestry'
 gem 'cancan'
 gem 'compass'
+gem 'curb'
 gem 'formtastic'
 gem 'has_enum'
 gem 'has_scope'
@@ -18,6 +20,12 @@ gem 'sass-rails'
 gem 'sso_client'
 gem 'sunspot_rails'
 
+group :test do
+  gem 'fabrication'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'sunspot_matchers'
+end
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
