@@ -7,7 +7,6 @@ gemspec
 
 gem 'cancan'
 gem 'compass'
-gem 'sass-rails'
 gem 'formtastic'
 gem 'has_enum'
 gem 'has_scope'
@@ -15,7 +14,7 @@ gem 'has_searcher'
 gem 'inherited_resources'
 gem 'jquery-rails'
 gem 'kaminari'
-gem 'restfulie'
+gem 'sass-rails'
 gem 'sso_client'
 gem 'sunspot_rails'
 

@@ -16,18 +16,19 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'cancan'
   s.add_dependency 'compass', '>= 0.12.alpha.2'
+  s.add_dependency 'curb'
   s.add_dependency 'formtastic'
   s.add_dependency 'has_enum'
   s.add_dependency 'has_searcher'
   s.add_dependency 'inherited_resources'
   s.add_dependency 'kaminari'
+  s.add_dependency 'progress_bar'
   s.add_dependency 'rails'
   s.add_dependency 'restfulie'
   s.add_dependency 'sass'
   s.add_dependency 'sass-rails'
   s.add_dependency 'sso_client'
   s.add_dependency 'sunspot_rails'
-
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'sunspot_solr'
