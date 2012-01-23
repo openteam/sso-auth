@@ -12,6 +12,10 @@ module EspPermissions
         @number += 1
       end
 
+      def create_config
+        template 'config/schedule.rb'
+      end
+
       def create_models
         template 'app/models/context.rb'
         template 'app/models/permission.rb'

@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sso_client'
   s.add_dependency 'spork', '>= 0.9.0.rc9'
   s.add_dependency 'sunspot_rails'
+  s.add_dependency 'whenever'
 
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'guard'

@@ -19,6 +19,7 @@ gem 'kaminari'
 gem 'sass-rails'
 gem 'sso_client'
 gem 'sunspot_rails'
+gem 'whenever'
 
 group :test do
   gem 'fabrication'
