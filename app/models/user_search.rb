@@ -1,5 +1,6 @@
 class UserSearch < Search
   column :keywords, :text
+  column :permissions_count_gt, :integer
 end
 
 # == Schema Information

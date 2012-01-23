@@ -25,6 +25,7 @@ module EspPermissions
       def create_migration
         migration_template 'db/migrate/esp_permissions_create_contexts.rb'
         migration_template 'db/migrate/esp_permissions_create_permissions.rb'
+        migration_template 'db/migrate/esp_permissions_add_permissions_count_to_users.rb'
       end
 
     end

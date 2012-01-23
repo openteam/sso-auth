@@ -1,6 +1,6 @@
 class Permission < ActiveRecord::Base
   belongs_to :context
-  belongs_to :user
+  belongs_to :user, :counter_cache => true
   has_enum :role, :scopes => true
 
   attr_accessor :user_search, :user_uid, :user_first_name, :user_last_name, :user_email

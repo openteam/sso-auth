@@ -10,7 +10,10 @@ class User < ActiveRecord::Base
 
   searchable do
     text :name, :email, :nickname, :phone, :last_name, :first_name
+    integer :permissions_count
   end
+
+  scope :with_permissions, where('permissions_count > 0')
 
   def self.from_omniauth(hash)
     User.find_or_initialize_by_uid(hash['uid']).tap do |user|

@@ -3,6 +3,7 @@ class EspPermissions::UsersController < EspPermissions::ApplicationController
 
   actions :index, :new, :create, :destroy, :search
 
+  has_scope :with_permissions, :default => 1
   has_scope :page, :default => 1
 
   def search
@@ -17,6 +18,7 @@ class EspPermissions::UsersController < EspPermissions::ApplicationController
     def search_and_paginate_collection
       if params[:utf8]
         search_object = searcher_for(resource_instance_name)
+        search_object.permissions_count_gt = 1
         search_object.pagination = paginate_options
         search_object.results
       else
