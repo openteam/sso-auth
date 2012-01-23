@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :permissions
   has_many :contexts, :through => :permissions
 
+  before_create :set_name, :unless => :name?
+
   searchable do
     text :name, :email, :nickname, :phone, :last_name, :first_name
   end
@@ -35,6 +37,12 @@ class User < ActiveRecord::Base
   def manager?
     permissions.where(:role => :manager).exists?
   end
+
+  protected
+
+    def set_name
+      self.name = [first_name, last_name].join(' ')
+    end
 end
 
 
