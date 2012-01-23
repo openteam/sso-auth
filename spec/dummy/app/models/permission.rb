@@ -7,7 +7,7 @@ class Permission < ActiveRecord::Base
 
   before_validation :reset_user_id, :unless => :user_id?
 
-  validates_presence_of :role, :user
+  validates_presence_of :role, :user, :context
 
   private
     def reset_user_id

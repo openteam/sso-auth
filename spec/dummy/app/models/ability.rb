@@ -14,11 +14,11 @@ class Ability
     end
 
     can :modify, Permission do | permission |
-      !permission.context && can?(:modify, permission.user)
+      !permission.context && user.manager?
     end
 
     can :modify, User do
-      user.permissions.where(:role => :manager).exists?
+      user.manager?
     end
   end
 end

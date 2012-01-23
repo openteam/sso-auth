@@ -9,13 +9,13 @@
 
 <%= link_to "&#43;#{t('permissions.create_permission')}".html_safe,
             esp_permissions.new_permission_path,
-            :class => 'new_permission' if can?(:modify, Permission)%>
+            :class => 'new_permission' %>
 
 <ul class='collection_list'>
   <% collection.each do |user| %>
     <li>
       <div class="name">
-        <%= user.full_name %>
+        <%= user.name %>
       </div>
       <div class="email">
         &lt;<%= mail_to user.email, user.email %>&gt;

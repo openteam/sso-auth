@@ -6,22 +6,34 @@ class User < ActiveRecord::Base
   has_many :permissions
   has_many :contexts, :through => :permissions
 
+  searchable do
+    text :name, :email, :nickname, :phone, :last_name, :first_name
+  end
+
   def self.from_omniauth(hash)
     User.find_or_initialize_by_uid(hash['uid']).tap do |user|
       user.update_attributes hash['info']
     end
   end
 
-  def full_name
-    nickname || name || "#{last_name} #{first_name}"
+  def contexts_for(role)
+    contexts.where(:permissions => {:role => role})
   end
 
-  searchable do
-    text :name, :email, :nickname, :phone, :last_name, :first_name
+  def contexts_subtree_for(role)
+    contexts_for(role).map(&:subtree).flatten.uniq
+  end
+
+  def contexts_subtree
+    contexts_subtree_for(Permission.enums[:role])
   end
 
   def available_contexts
-    contexts.where(:permissions => {:role => :manager}).map(&:subtree).flatten.uniq
+    contexts_subtree_for(:manager)
+  end
+
+  def manager?
+    permissions.where(:role => :manager).exists?
   end
 end
 
