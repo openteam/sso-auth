@@ -1,5 +1,5 @@
 <h3>
-  <%= "#{t('permissions.You are adding role to')}  #{@user.full_name if @user}" %>
+  <%= "#{t('permissions.You are adding role to')}  #{@user.try(:name)}" %>
 </h3>
 
 <%= semantic_form_for resource,
