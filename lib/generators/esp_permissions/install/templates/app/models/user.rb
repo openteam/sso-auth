@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def manager?
-    permissions.where(:role => :manager).exists?
+    permissions.for_roles(:manager).exists?
   end
 
   protected
