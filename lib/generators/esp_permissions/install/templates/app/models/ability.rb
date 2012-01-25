@@ -3,6 +3,9 @@ class Ability
 
 
   def initialize(user)
+
+    return unless user
+
     alias_action :create, :read, :update, :destroy, :to => :modify
 
     can :modify, Context do | context |
