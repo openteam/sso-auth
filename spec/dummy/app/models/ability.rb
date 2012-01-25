@@ -6,7 +6,7 @@ class Ability
     alias_action :create, :read, :update, :destroy, :to => :modify
 
     can :modify, Context do | context |
-      user.permissions.where(:role => :manager).where(:context_id => context.ancestor_ids + [context.id]).exists?
+      user.permissions.for_roles(:manager).for_context(context).exists?
     end
 
     can :modify, Permission do | permission |

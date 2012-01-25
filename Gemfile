@@ -3,6 +3,7 @@ source :rubygems
 gemspec
 
 gem 'jquery-rails'
+gem 'russian'
 
 group :test do
   gem 'fabrication'

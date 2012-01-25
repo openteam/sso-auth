@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120123141829) do
+ActiveRecord::Schema.define(:version => 20120125151559) do
 
   create_table "contexts", :force => true do |t|
     t.string   "type"
     t.string   "title"
     t.string   "ancestry"
     t.string   "weight"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "contexts", ["ancestry"], :name => "index_contexts_on_ancestry"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20120123141829) do
     t.integer  "user_id"
     t.integer  "context_id"
     t.string   "role"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(:version => 20120123141829) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "permissions_count"
   end
 
