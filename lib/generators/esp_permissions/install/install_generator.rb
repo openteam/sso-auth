@@ -36,6 +36,7 @@ module EspPermissions
         migration_template 'db/migrate/esp_permissions_create_contexts.rb'
         migration_template 'db/migrate/esp_permissions_create_permissions.rb'
         migration_template 'db/migrate/esp_permissions_add_permissions_count_to_users.rb'
+        migration_template 'db/migrate/esp_permissions_add_role_user_id_context_id_index_to_permissions.rb'
       end
 
     end

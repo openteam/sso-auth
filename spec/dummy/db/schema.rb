@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125151559) do
+ActiveRecord::Schema.define(:version => 20120125172563) do
 
   create_table "contexts", :force => true do |t|
     t.string   "type"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20120125151559) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "permissions", ["role", "context_id", "user_id"], :name => "index_permissions_on_role_and_context_id_and_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "uid"

@@ -16,3 +16,16 @@ class Context < ActiveRecord::Base
   end
 
 end
+# == Schema Information
+#
+# Table name: contexts
+#
+#  id         :integer         not null, primary key
+#  type       :string(255)
+#  title      :string(255)
+#  ancestry   :string(255)
+#  weight     :string(255)
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#
+
