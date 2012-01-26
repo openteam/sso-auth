@@ -8,6 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= render :partial => "esp_permissions/shared/header" %>
   <h1><%= t('permissions.title') %></h1>
   <div class="container">
     <div class="logged_info">
@@ -18,5 +19,6 @@
     </div>
     <%= yield %>
   </div>
+  <%= render :partial => "esp_permissions/shared/footer" %>
 </body>
 </html>
