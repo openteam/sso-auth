@@ -41,6 +41,12 @@ body
         text-decoration: underline
       @else
         text-decoration: none
+    &.selected
+      color: $espp_text_color
+      @if $espp_underline_link
+        text-decoration: none
+      @else
+        text-decoration: underline
 
 .espp_header_wrapper
   +fixed_block
