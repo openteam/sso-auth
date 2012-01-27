@@ -1,3 +1,17 @@
-<div class="esp_permissions_header">
-  Тут будет хидер
+<div class='espp_header_wrapper'>
+  <div class='espp_header'>
+    <div class='navigation'>
+      <a href='/'>Публичный вид</a>
+      <a href='/manage'>Система управления</a>
+      <a href='/manage/permissions'>Права доступа</a>
+    </div>
+    <div class='auth'>
+      <% if current_user %>
+        <span class='current_user'><%= current_user.name %></span>
+        <a href='/sso/sign_out'>Выход</a>
+      <% else %>
+        <a href='/sso/sign_in'>Вход в систему</a>
+      <% end %>
+    </div>
+  </div>
 </div>

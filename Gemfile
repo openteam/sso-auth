@@ -2,6 +2,7 @@ source :rubygems
 
 gemspec
 
+gem 'compass'
 gem 'jquery-rails'
 gem 'russian'
 

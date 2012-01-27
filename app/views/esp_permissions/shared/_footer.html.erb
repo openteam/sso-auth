@@ -1,0 +1,12 @@
+<div class='espp_footer_wrapper'>
+  <div class='espp_footer'>
+    <div class='info'>
+      <%= [request.remote_addr, request.remote_ip].join(', ').split(', ').uniq.join(', ') %>
+      <%= request.env['HTTP_USER_AGENT'] %>
+    </div>
+    <div class='developer'>
+      <span class='range'>2011&ndash;<%= Date.today.year %></span>
+      <a href='http://openteam.ru/' title='Сделано с любовью в OpenTeam'>OpenTeam</a>
+    </div>
+  </div>
+</div>
