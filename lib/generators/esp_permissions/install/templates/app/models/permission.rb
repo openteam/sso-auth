@@ -1,7 +1,7 @@
 class Permission < ActiveRecord::Base
   attr_accessor :user_search, :user_uid, :user_first_name, :user_last_name, :user_email
 
-  belongs_to :context
+  belongs_to :context, :polymorphic => true
   belongs_to :user, :counter_cache => true
 
   scope :for_roles,   ->(*roles)  { where(:role => roles) }
@@ -11,7 +11,7 @@ class Permission < ActiveRecord::Base
 
   validates_presence_of :role, :user, :context
 
-  validates_uniqueness_of :role, :scope => [:user_id, :context_id]
+  validates_uniqueness_of :role, :scope => [:user_id, :context_id, :context_type]
 
   has_enum :role
 

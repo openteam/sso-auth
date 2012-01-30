@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   validates_presence_of :uid
 
   has_many :permissions
-  has_many :contexts, :through => :permissions
 
   scope :with_permissions, where('permissions_count > 0')
 
@@ -13,6 +12,10 @@ class User < ActiveRecord::Base
   searchable do
     text :name, :email, :nickname, :phone, :last_name, :first_name
     integer :permissions_count
+  end
+
+  def contexts
+    Context.where(:user_id => self, :type => nil)
   end
 
   def self.from_omniauth(hash)
@@ -39,6 +42,10 @@ class User < ActiveRecord::Base
 
   def manager?
     permissions.for_roles(:manager).exists?
+  end
+
+  def manager_of?(context)
+    permissions.for_roles(:manager).for_context(context).exists?
   end
 
   protected

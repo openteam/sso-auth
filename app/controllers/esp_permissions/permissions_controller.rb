@@ -1,5 +1,6 @@
 class EspPermissions::PermissionsController < EspPermissions::ApplicationController
   belongs_to :user, :optional => true
+  helper_method :available_contexts
 
   def create
     unless params[:user_id] && @user = User.find(params[:user_id])
@@ -25,4 +26,10 @@ class EspPermissions::PermissionsController < EspPermissions::ApplicationControl
       render :new
     end
   end
+
+  protected
+
+    def available_contexts
+      @available_contexts ||= Context.available_for(current_user)
+    end
 end

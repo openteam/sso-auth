@@ -3,23 +3,29 @@
 require 'spec_helper'
 
 describe Ability do
-  let(:root)                { Fabricate :context }
-    let(:child_1)           { Fabricate :context, :parent => root }
-      let(:category_1_1)    { Fabricate :context, :parent => child_1 }
-    let(:child_1_1)         { Fabricate :context, :parent => child_1 }
-    let(:child_2)           { Fabricate :context, :parent => root }
+  let(:root)              { Fabricate :context }
+  let(:child_1)           { Fabricate :context, :parent => root }
+  let(:child_1_1)         { Fabricate :context, :parent => child_1 }
+  let(:child_1_1)         { Fabricate :context, :parent => child_1 }
+  let(:child_2)           { Fabricate :context, :parent => root }
 
   def ability_for(user)
     Ability.new(user)
   end
 
   def user
-    Fabricate(:user)
+    @user = Fabricate(:user)
   end
 
-  def manager_of(category)
+  def manager_of(context)
     user.tap do | user |
-      user.permissions.create! :context => category, :role => :manager
+      user.permissions.create! :context => context, :role => :manager
+    end
+  end
+
+  def subcontext(context)
+    Fabricate(:subcontext, :context => context).tap do | context |
+      @user.permissions.create! :context => context, :role => :manager
     end
   end
 
@@ -43,16 +49,22 @@ describe Ability do
         it { should be_able_to(:manage, manager_of(child_2).permissions.first) }
       end
 
-      context 'управление разделами' do
-        it { should be_able_to(:manage, category_1_1) }
-      end
-
-      context 'управление подразделениями' do
+      context 'управление контекстами' do
         it { should be_able_to(:manage, root) }
         it { should be_able_to(:manage, child_1) }
         it { should be_able_to(:manage, child_1_1) }
+        it { should be_able_to(:manage, child_1_1) }
         it { should be_able_to(:manage, child_2) }
       end
+
+      context 'управление вложенными контекстами' do
+        it { subject.should be_able_to(:manage, subcontext(root)) }
+        it { subject.should be_able_to(:manage, subcontext(child_1)) }
+        it { subject.should be_able_to(:manage, subcontext(child_1_1)) }
+        it { subject.should be_able_to(:manage, subcontext(child_1_1)) }
+        it { subject.should be_able_to(:manage, subcontext(child_2)) }
+      end
+
     end
 
     context 'вложенного подразделения' do
@@ -75,7 +87,7 @@ describe Ability do
       end
 
       context 'управление разделами' do
-        it { should be_able_to(:manage, category_1_1) }
+        it { should be_able_to(:manage, child_1_1) }
       end
 
       context 'управление подразделениями' do

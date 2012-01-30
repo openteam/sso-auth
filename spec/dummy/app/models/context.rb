@@ -4,8 +4,11 @@ class Context < ActiveRecord::Base
 
   attr_accessible :id, :title, :ancestry, :weight
 
+  has_many :subcontexts
   has_many :permissions
   has_many :users, :through => :permissions
+
+  scope :for_user, ->(user) { joins(:permissions).where(:permissions => {:user_id => user}) }
 
   alias_attribute :to_s, :title
 
@@ -13,6 +16,10 @@ class Context < ActiveRecord::Base
 
   searchable do
     text :title
+  end
+
+  def self.available_for(user)
+    @available_contexts ||= for_user(user).map(&:subtree).flatten.uniq.map{|c| c.respond_to?(:subcontexts) ? [c]+c.subcontexts : c }.flatten
   end
 
 end
