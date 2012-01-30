@@ -1,3 +1,28 @@
 = EspPermissions
 
+== Usage
+
+Gemfile
+
+  gem 'esp-permissions'
+
+Layout
+
+  <body>
+    <%= render :partial => "esp_permissions/shared/header" %>
+    ...
+    <%= yield %>
+    ...
+    <%= render :partial => "esp_permissions/shared/footer" %>
+  </body>
+
+Stylesheet
+
+  *= require ...
+  *= require esp_permissions/shared // common styles
+  *= require custom_esp_permissions // customize styles
+  */
+
+== License
+
 This project rocks and uses MIT-LICENSE.
