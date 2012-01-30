@@ -2,6 +2,7 @@ ru:
   activerecord:
     attributes:
       permission:
+        polimorphic_context:  Контекст
         context:              Категория
         role:                 Роль
         user_search:          Пользователь

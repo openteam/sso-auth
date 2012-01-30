@@ -10,9 +10,10 @@
     <%= form.input :user_last_name, :as => :hidden %>
     <%= form.input :user_email, :as => :hidden %>
     <%= form.input :user_search, :as => :string unless @user %>
-    <%= form.input :context, :collection => available_contexts,
-                             :member_label => ->(c) { ('&nbsp;' * 2 * c.depth + c.title).html_safe },
-                             :include_blank => t('permissions.not_selected') %>
+    <%= form.input :polimorphic_context,  :collection => available_contexts,
+                                          :member_value => ->(c) { [c.class.model_name.underscore, c.id].join('_') },
+                                          :member_label => ->(c) { ('&nbsp;' * 2 * c.depth + c.title).html_safe },
+                                          :include_blank => t('permissions.not_selected') %>
     <%= form.input :role, :as => :select, :collection => Permission.human_enums[:role].invert, :include_blank => t('permissions.not_selected') %>
   <% end %>
   <%= form.buttons :class => 'button-group' do %>
