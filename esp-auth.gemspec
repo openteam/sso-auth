@@ -16,8 +16,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'ancestry'
   s.add_dependency 'cancan'
-  s.add_dependency 'compass', '>= 0.12.alpha.2'
+  s.add_dependency 'compass', '>= 0.12.alpha.4'
   s.add_dependency 'curb'
+  s.add_dependency 'default_value_for'
   s.add_dependency 'formtastic'
   s.add_dependency 'has_enum'
   s.add_dependency 'has_scope'
