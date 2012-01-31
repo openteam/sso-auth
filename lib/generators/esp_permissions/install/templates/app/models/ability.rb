@@ -7,7 +7,15 @@ class Ability
     return unless user
 
     can :manage, Context do | context |
-      user.permissions.for_roles(:manager).for_context(context).exists?
+      user.manager_of?(context)
+    end
+
+    can :manage, Subcontext do | subcontext |
+      can? :manage, subcontext.context
+    end
+
+    can :manage, Subcontext do | subcontext |
+      user.manager_of?(subcontext)
     end
 
     can :manage, Permission do | permission |

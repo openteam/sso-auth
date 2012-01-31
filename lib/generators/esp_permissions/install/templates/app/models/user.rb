@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates_presence_of :uid
 
   has_many :permissions
+  has_many :contexts, :through => :permissions, :conditions => { :context_type => nil }
 
   scope :with_permissions, where('permissions_count > 0')
 
@@ -14,30 +15,10 @@ class User < ActiveRecord::Base
     integer :permissions_count
   end
 
-  def contexts
-    Context.where(:user_id => self, :type => nil)
-  end
-
   def self.from_omniauth(hash)
     User.find_or_initialize_by_uid(hash['uid']).tap do |user|
       user.update_attributes hash['info']
     end
-  end
-
-  def contexts_for(role)
-    contexts.where(:permissions => {:role => role})
-  end
-
-  def contexts_subtree_for(role)
-    contexts_for(role).map(&:subtree).flatten.uniq
-  end
-
-  def contexts_subtree
-    contexts_subtree_for(Permission.enums[:role])
-  end
-
-  def available_contexts
-    contexts_subtree_for(:manager)
   end
 
   def manager?
@@ -45,7 +26,7 @@ class User < ActiveRecord::Base
   end
 
   def manager_of?(context)
-    permissions.for_roles(:manager).for_context(context).exists?
+    permissions.for_roles(:manager).for_context_and_ancestors(context).exists?
   end
 
   protected

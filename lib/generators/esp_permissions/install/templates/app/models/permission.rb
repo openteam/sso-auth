@@ -1,13 +1,26 @@
 class Permission < ActiveRecord::Base
-  attr_accessor :user_search, :user_uid, :user_first_name, :user_last_name, :user_email
+  attr_accessor :user_search, :user_uid, :user_first_name, :user_last_name, :user_email, :polimorphic_context
 
   belongs_to :context, :polymorphic => true
   belongs_to :user, :counter_cache => true
 
-  scope :for_roles,   ->(*roles)  { where(:role => roles) }
-  scope :for_context, ->(context) { where(:context_id => (context.ancestor_ids + [context.id])) }
+  scope :for_roles,                 ->(*roles)                            { where(:role => roles) }
+  scope :for_context_ancestors,     ->(context, ids=context.ancestor_ids) {
+                                                                            where(:context_id => ids,
+                                                                                  :context_type => (context.class.ancestors - context.class.included_modules).map(&:name))
+                                                                          }
+  scope :for_context,               ->(context)                           { where(:context_id => context.id, :context_type => context.class) }
+
+  scope :for_context_and_ancestors, ->(context)                           {
+                                                                            if context.respond_to?(:ancestor_ids)
+                                                                              for_context_ancestors(context, context.ancestor_ids + [context.id])
+                                                                            else
+                                                                              for_context(context)
+                                                                            end
+                                                                          }
 
   before_validation :reset_user_attributes, :unless => :user_id?
+  before_validation :set_context, :if => :polimorphic_context
 
   validates_presence_of :role, :user, :context
 
@@ -23,6 +36,11 @@ class Permission < ActiveRecord::Base
       self.user_last_name = nil
       self.user_email = nil
       self.errors[:user_search] = ::I18n.t('activerecord.errors.models.permission.attributes.user_id.blank')
+    end
+
+    def set_context
+      underscored_context_type, self.context_id = polimorphic_context.match(/(\w+)_(\d+)/)[1..2]
+      self.context_type = underscored_context_type.camelize
     end
 end
 
