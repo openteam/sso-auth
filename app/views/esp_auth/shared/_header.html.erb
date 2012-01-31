@@ -8,7 +8,7 @@
           <%= link_to 'Система управления', '/manage', :class => current.manage? ? 'selected' : nil %>
         <% end %>
         <% if current_user.permissions.for_roles(:manager).exists? %>
-          <%= link_to 'Права доступа', '/manage/permissions', :class => current.esp_auth? ? 'selected' : nil %>
+          <%= link_to 'Права доступа', '/auth', :class => current.esp_auth? ? 'selected' : nil %>
         <% end %>
       </div>
       <div class='auth'>
