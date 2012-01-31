@@ -8,16 +8,16 @@
           <%= link_to 'Система управления', '/manage', :class => current.manage? ? 'selected' : nil %>
         <% end %>
         <% if current_user.permissions.for_roles(:manager).exists? %>
-          <%= link_to 'Права доступа', '/auth', :class => current.esp_auth? ? 'selected' : nil %>
+          <%= link_to 'Права доступа', esp_auth.users_path, :class => current.esp_auth? ? 'selected' : nil %>
         <% end %>
       </div>
       <div class='auth'>
         <span class='current_user'><%= current_user.name %></span>
-        <a href='/sso/sign_out'>Выход</a>
+        <%= link_to('Выход', esp_auth.destroy_user_session_path) %>
       </div>
     <% else %>
       <div class='auth'>
-        <a href='/sso/sign_in'>Вход в систему</a>
+        <%= link_to 'Вход в систему', user_omniauth_authorize_path(:identity)  %>
       </div>
     <% end %>
   </div>

@@ -19,6 +19,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'compass', '>= 0.12.alpha.4'
   s.add_dependency 'curb'
   s.add_dependency 'default_value_for'
+  s.add_dependency 'devise'
+  s.add_dependency 'devise-russian'
+  s.add_dependency 'omniauth'
+  s.add_dependency 'omniauth-oauth2'
   s.add_dependency 'formtastic'
   s.add_dependency 'has_enum'
   s.add_dependency 'has_scope'
@@ -29,7 +33,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails'
   s.add_dependency 'sass'
   s.add_dependency 'sass-rails'
-  s.add_dependency 'sso_client'
   s.add_dependency 'sunspot_rails'
   s.add_dependency 'whenever'
 
