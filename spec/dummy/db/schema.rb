@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131102737) do
+ActiveRecord::Schema.define(:version => 20120131105907) do
 
   create_table "contexts", :force => true do |t|
     t.string   "type"
@@ -56,14 +56,14 @@ ActiveRecord::Schema.define(:version => 20120131102737) do
     t.text     "phone"
     t.text     "urls"
     t.text     "raw_info"
-    t.integer  "sign_in_count",      :default => 0
+    t.integer  "permissions_count"
+    t.integer  "sign_in_count"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.integer  "permissions_count"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   add_index "users", ["uid"], :name => "index_users_on_uid"

@@ -1,0 +1,24 @@
+<div class='espp_header_wrapper'>
+  <div class='espp_header'>
+    <% if current_user %>
+      <% current = controller_path.match(/^([a-z_]+)/)[0].inquiry %>
+      <div class='navigation'>
+        <% if current_user.permissions.exists? %>
+          <%= link_to 'Публичный вид', '/', :class => current.manage? || current.esp_auth? ? nil : 'selected' %>
+          <%= link_to 'Система управления', '/manage', :class => current.manage? ? 'selected' : nil %>
+        <% end %>
+        <% if current_user.permissions.for_roles(:manager).exists? %>
+          <%= link_to 'Права доступа', '/manage/permissions', :class => current.esp_auth? ? 'selected' : nil %>
+        <% end %>
+      </div>
+      <div class='auth'>
+        <span class='current_user'><%= current_user.name %></span>
+        <a href='/sso/sign_out'>Выход</a>
+      </div>
+    <% else %>
+      <div class='auth'>
+        <a href='/sso/sign_in'>Вход в систему</a>
+      </div>
+    <% end %>
+  </div>
+</div>

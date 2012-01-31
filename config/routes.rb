@@ -1,4 +1,4 @@
-EspPermissions::Engine.routes.draw do
+EspAuth::Engine.routes.draw do
   resources :permissions, :only => [:new, :create, :destroy]
 
   resources :users, :only => :index do

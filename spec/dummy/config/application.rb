@@ -9,7 +9,7 @@ require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 Bundler.require
-require "esp-permissions"
+require "esp-auth"
 
 module Dummy
   class Application < Rails::Application

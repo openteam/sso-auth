@@ -1,26 +1,26 @@
-= EspPermissions
+= EspAuth
 
 == Usage
 
 Gemfile
 
-  gem 'esp-permissions'
+  gem 'esp-auth'
 
 Layout
 
   <body>
-    <%= render :partial => "esp_permissions/shared/header" %>
+    <%= render :partial => "esp_auth/shared/header" %>
     ...
     <%= yield %>
     ...
-    <%= render :partial => "esp_permissions/shared/footer" %>
+    <%= render :partial => "esp_auth/shared/footer" %>
   </body>
 
 Stylesheet
 
   *= require ...
-  *= require esp_permissions/shared // common styles
-  *= require custom_esp_permissions // customize styles
+  *= require esp_auth/shared // common styles
+  *= require custom_esp_auth // customize styles
   */
 
 == License
