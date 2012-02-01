@@ -1,6 +1,10 @@
 module EspAuth
   module SpecHelper
 
+    def ability_for(user)
+      Ability.new(user)
+    end
+
     def user
       @user ||= User.create! :uid => 1, :name => 'User'
     end

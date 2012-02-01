@@ -3,10 +3,6 @@
 require 'spec_helper'
 
 describe Ability do
-  def ability_for(user)
-    Ability.new(user)
-  end
-
   context 'менеджер' do
     context 'корневого контекста' do
       subject { ability_for(manager_of(root)) }
