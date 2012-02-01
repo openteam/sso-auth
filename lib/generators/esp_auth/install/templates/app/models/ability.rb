@@ -2,19 +2,11 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-
     return unless user
 
+    ## common
     can :manage, Context do | context |
       user.manager_of?(context)
-    end
-
-    can :manage, Subcontext do | subcontext |
-      can? :manage, subcontext.context
-    end
-
-    can :manage, Subcontext do | subcontext |
-      user.manager_of?(subcontext)
     end
 
     can :manage, Permission do | permission |
@@ -35,6 +27,15 @@ class Ability
 
     can :manage, :permissions do
       user.manager?
+    end
+
+    ## app specific
+    can :manage, Subcontext do | subcontext |
+      can? :manage, subcontext.context
+    end
+
+    can :manage, Subcontext do | subcontext |
+      user.manager_of?(subcontext)
     end
   end
 end

@@ -14,8 +14,8 @@ module EspAuth
 
       def create_models
         template 'app/models/ability.rb'
-        template 'app/models/context.rb'
         template 'app/models/user.rb'
+        template 'app/models/context.rb'
         template 'app/models/permission.rb'
         template 'app/models/subcontext.rb'
       end
@@ -34,8 +34,8 @@ module EspAuth
       end
 
       def create_migrations
-        migration_template 'db/migrate/esp_auth_create_contexts.rb'
         migration_template 'db/migrate/esp_auth_create_users.rb'
+        migration_template 'db/migrate/esp_auth_create_contexts.rb'
         migration_template 'db/migrate/esp_auth_create_permissions.rb'
         migration_template 'db/migrate/esp_auth_create_subcontexts.rb'
       end

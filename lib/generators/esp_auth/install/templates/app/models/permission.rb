@@ -2,7 +2,7 @@ class Permission < ActiveRecord::Base
   attr_accessor :user_search, :user_uid, :user_name, :user_email, :polimorphic_context
 
   belongs_to :context, :polymorphic => true
-  belongs_to :user, :counter_cache => true
+  belongs_to :user
 
   scope :for_roles, ->(*roles) { where(:role => roles) }
   scope :for_context_ancestors, ->(context, ids=context.ancestor_ids) do
