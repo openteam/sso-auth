@@ -1,4 +1,4 @@
-require "esp-auth/engine"
+require "esp_auth/engine"
 
 require 'ancestry'
 require 'cancan'

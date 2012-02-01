@@ -35,21 +35,18 @@ $(function(){
         data: request.term,
         success: function(data) {
          response($.map(data, function(item){
-           var user_name = [item.last_name, item.first_name].join(' ');
+           var item_label = item.name
 
-           var item_string = user_name.length > 0  ? user_name : '';
-
-           (user_name.length > 1 && item.email.length > 0) ? item_string += ', ' : '';
-
-           item.email.length > 0 ? item_string += '<'+item.email+'>' : '';
+           if (item.email.length > 0) {
+             item_label += ' <' + item.email + '>'
+           }
 
            return {
-             uid:        item.id,
-             label:      item_string,
-             value:      item_string,
-             first_name: item.first_name,
-             last_name:  item.last_name,
-             email:      item.email
+             uid:   item.uid,
+             label: item_label,
+             value: item_label,
+             name:  item.name,
+             email: item.email
            }
          }));
         }
@@ -58,8 +55,7 @@ $(function(){
     minLength: 2,
     select: function(event, ui){
       $('#permission_user_uid').val(ui.item.uid);
-      $('#permission_user_first_name').val(ui.item.first_name);
-      $('#permission_user_last_name').val(ui.item.last_name);
+      $('#permission_user_name').val(ui.item.name);
       $('#permission_user_email').val(ui.item.email);
     }
   });

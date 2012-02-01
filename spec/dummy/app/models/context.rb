@@ -2,7 +2,7 @@ class Context < ActiveRecord::Base
 
   default_scope order('weight')
 
-  attr_accessible :id, :title, :ancestry, :weight
+  attr_accessible :id, :title, :ancestry, :weight, :parent
 
   has_many :subcontexts
   has_many :permissions
@@ -28,7 +28,6 @@ end
 # Table name: contexts
 #
 #  id         :integer         not null, primary key
-#  type       :string(255)
 #  title      :string(255)
 #  ancestry   :string(255)
 #  weight     :string(255)

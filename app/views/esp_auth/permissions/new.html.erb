@@ -6,8 +6,7 @@
                       :url => (@user ? esp_auth.user_permissions_path(@user) : esp_auth.permissions_path) do |form| %>
   <%= form.inputs do  %>
     <%= form.input :user_uid, :as => :hidden %>
-    <%= form.input :user_first_name, :as => :hidden %>
-    <%= form.input :user_last_name, :as => :hidden %>
+    <%= form.input :user_name, :as => :hidden %>
     <%= form.input :user_email, :as => :hidden %>
     <%= form.input :user_search, :as => :string unless @user %>
     <%= form.input :polimorphic_context,  :as => :select,

@@ -26,10 +26,6 @@ class Ability
       user.manager?
     end
 
-    can :manage, User do
-      user.manager?
-    end
-
     can :manage, :application do
       user.permissions.exists?
     end

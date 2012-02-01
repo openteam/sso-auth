@@ -1,7 +1,7 @@
 $:.push File.expand_path('../lib', __FILE__)
 
 # Maintain your gem's version:
-require 'esp-auth/version'
+require 'esp_auth/version'
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
@@ -36,14 +36,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'sunspot_rails'
   s.add_dependency 'whenever'
 
-  s.add_development_dependency 'fabrication'
-  s.add_development_dependency 'forgery'
   s.add_development_dependency 'guard'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'guard-spork'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'russian'
-  s.add_development_dependency 'ryba'
   s.add_development_dependency 'shoulda-matchers'
   s.add_development_dependency 'spork'
   s.add_development_dependency 'sqlite3'

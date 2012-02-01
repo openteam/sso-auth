@@ -1,5 +1,5 @@
 class Permission < ActiveRecord::Base
-  attr_accessor :user_search, :user_uid, :user_first_name, :user_last_name, :user_email, :polimorphic_context
+  attr_accessor :user_search, :user_uid, :user_name, :user_email, :polimorphic_context
 
   belongs_to :context, :polymorphic => true
   belongs_to :user, :counter_cache => true
@@ -19,29 +19,40 @@ class Permission < ActiveRecord::Base
                                                                             end
                                                                           }
 
-  before_validation :reset_user_attributes, :unless => :user_id?
-  before_validation :set_context, :if => :polimorphic_context
+
+  before_validation :set_context
+  before_validation :set_user
+
+  after_create :user_index!
+  after_destroy :user_index!
+
+  validates_presence_of :polimorphic_context, :unless => :context
 
   validates_presence_of :role, :user, :context
+
+  validates_presence_of :user_search, :unless => :user
 
   validates_uniqueness_of :role, :scope => [:user_id, :context_id, :context_type]
 
   has_enum :role
 
+
   private
-    def reset_user_attributes
-      self.user_id = nil
-      self.user_uid = nil
-      self.user_first_name = nil
-      self.user_last_name = nil
-      self.user_email = nil
-      self.errors[:user_search] = ::I18n.t('activerecord.errors.models.permission.attributes.user_id.blank')
+
+    def set_user
+      return unless user_uid.present?
+      self.user = User.find_or_initialize_by_uid(user_uid).tap do |user|
+        user.update_attributes :name => user_name, :email => user_email
+      end
     end
 
     def set_context
+      return unless polimorphic_context.present?
       underscored_context_type, self.context_id = polimorphic_context.match(/(\w+)_(\d+)/)[1..2]
       self.context_type = underscored_context_type.camelize
     end
+
+    delegate :index!, :to => :user, :prefix => true
 end
 
 # == Schema Information
