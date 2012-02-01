@@ -22,7 +22,11 @@ class Ability
       can? :manage, permission.context
     end
 
-    can :create, Permission do | permission |
+    can :new, Permission do | permission |
+      user.manager?
+    end
+
+    can [:search, :index], User do
       user.manager?
     end
 

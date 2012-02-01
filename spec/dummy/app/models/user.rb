@@ -10,8 +10,9 @@ class User < ActiveRecord::Base
   devise :omniauthable, :trackable, :timeoutable
 
   searchable do
+    integer :uid
     text :term do [name, email, nickname].join(' ') end
-    integer :permissions_count
+    integer :permissions_count do permissions.count end
   end
 
   def manager?
@@ -22,9 +23,6 @@ class User < ActiveRecord::Base
     permissions.for_roles(:manager).for_context_and_ancestors(context).exists?
   end
 
-  private
-
-    delegate :count, :to => :permissions, :prefix => true
 end
 
 

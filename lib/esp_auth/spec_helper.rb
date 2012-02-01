@@ -11,7 +11,7 @@ module EspAuth
 
     def subcontext(context)
       @subcontext ||= Subcontext.create!(:context => context).tap do | subcontext |
-                        user.permissions.create! :context => context, :role => :manager
+                        another_user.permissions.create! :context => subcontext, :role => :manager
                       end
     end
 

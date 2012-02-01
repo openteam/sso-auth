@@ -4,24 +4,23 @@ class Permission < ActiveRecord::Base
   belongs_to :context, :polymorphic => true
   belongs_to :user, :counter_cache => true
 
-  scope :for_roles,                 ->(*roles)                            { where(:role => roles) }
-  scope :for_context_ancestors,     ->(context, ids=context.ancestor_ids) {
-                                                                            where(:context_id => ids,
-                                                                                  :context_type => (context.class.ancestors - context.class.included_modules).map(&:name))
-                                                                          }
-  scope :for_context,               ->(context)                           { where(:context_id => context.id, :context_type => context.class) }
+  scope :for_roles, ->(*roles) { where(:role => roles) }
+  scope :for_context_ancestors, ->(context, ids=context.ancestor_ids) do
+    where(:context_id => ids,
+          :context_type => (context.class.ancestors - context.class.included_modules).map(&:name))
+  end
+  scope :for_context, ->(context) { where(:context_id => context.id, :context_type => context.class) }
 
-  scope :for_context_and_ancestors, ->(context)                           {
-                                                                            if context.respond_to?(:ancestor_ids)
-                                                                              for_context_ancestors(context, context.ancestor_ids + [context.id])
-                                                                            else
-                                                                              for_context(context)
-                                                                            end
-                                                                          }
+  scope :for_context_and_ancestors, ->(context) do
+    if context.respond_to?(:ancestor_ids)
+      for_context_ancestors(context, context.ancestor_ids + [context.id])
+    else
+      for_context(context)
+    end
+  end
 
-
-  before_validation :set_user
-  before_validation :set_context
+  after_initialize :set_user, :if => :user_uid_present?
+  after_initialize :set_context, :if => :polimorphic_context_present?
 
   after_create :user_index!
   after_destroy :user_index!
@@ -40,19 +39,19 @@ class Permission < ActiveRecord::Base
   private
 
     def set_user
-      return unless user_uid.present?
       self.user = User.find_or_initialize_by_uid(user_uid).tap do |user|
         user.update_attributes :name => user_name, :email => user_email
       end
     end
 
     def set_context
-      return unless polimorphic_context.present?
       underscored_context_type, self.context_id = polimorphic_context.match(/(\w+)_(\d+)/)[1..2]
       self.context_type = underscored_context_type.camelize
     end
 
     delegate :index!, :to => :user, :prefix => true
+    delegate :present?, :to => :polimorphic_context, :prefix => true
+    delegate :present?, :to => :user_uid, :prefix => true
 end
 
 # == Schema Information
