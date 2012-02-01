@@ -13,7 +13,7 @@
 
 <ul class='collection_list'>
   <% collection.each do |user| %>
-    <li>
+    <li class='user'>
       <div class="name">
         <%= user.name %>
       </div>
@@ -23,32 +23,28 @@
 
       <div class="links">
         <%= link_to "&darr;&nbsp;#{t('permissions.show_permissions')}".html_safe, '#', :class => 'show_permissions' %>
-        <%= link_to "&#43;#{t('permissions.new')}".html_safe, esp_auth.new_user_permission_path(user), :class => 'add' if can?(:update, user) %>
+        <%= link_to "&#43;#{t('permissions.new')}".html_safe, esp_auth.new_user_permission_path(user), :class => 'add' %>
       </div>
 
-      <%= content_tag :ul, :class => 'permission_list' do %>
-        <% if user.permissions.exists? %>
-          <% user.permissions.group_by(&:role).each do |role, permissions| %>
-            <li>
-              <h4><%= Permission.human_enums[:role][role] %></h4>
-              <ul>
-                <% permissions.each do |permission| %>
-                  <li>
-                    <%= permission.context %>
-                    <%= link_to t('permissions.delete'),
-                      esp_auth.permission_path(permission),
-                      :method => :delete,
-                      :confirm => t('permissions.Are you sure?'),
-                      :class => 'buttton icon remove danger' if can?(:destroy, permission) %>
-                  </li>
-                <% end %>
-              </ul>
-            </li>
-          <% end %>
-        <% else %>
-          <li>Нет прав доступа</li>
+      <ul class='permission_list'>
+        <% user.permissions.group_by(&:role).each do |role, permissions| %>
+          <li>
+            <h4><%= permissions.first.human_role %></h4>
+            <ul>
+              <% permissions.each do |permission| %>
+                <li>
+                  <%= permission.context %>
+                  <%= link_to t('permissions.delete'),
+                    esp_auth.permission_path(permission),
+                    :method => :delete,
+                    :confirm => t('permissions.Are you sure?'),
+                    :class => 'buttton icon remove danger' if can?(:destroy, permission) %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
         <% end %>
-      <% end %>
+      </ul>
 
     </li>
   <% end %>

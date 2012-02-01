@@ -1,11 +1,11 @@
-class EspAuth::ApplicationController < ApplicationController
+class EspAuth::ApplicationController < EspAuth::ManageController
+  before_filter :authorize_user_can_manage_permissions!
+
   inherit_resources
-  before_filter :authenticate_user!
-  before_filter :authorize_user!
 
   protected
 
-    def authorize_user!
-      authorize! :create, Permission.new
+    def authorize_user_can_manage_permissions!
+      authorize! :manage, :permissions
     end
 end

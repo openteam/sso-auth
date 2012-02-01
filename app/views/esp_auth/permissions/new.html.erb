@@ -10,7 +10,8 @@
     <%= form.input :user_last_name, :as => :hidden %>
     <%= form.input :user_email, :as => :hidden %>
     <%= form.input :user_search, :as => :string unless @user %>
-    <%= form.input :polimorphic_context,  :collection => available_contexts,
+    <%= form.input :polimorphic_context,  :as => :select,
+                                          :collection => available_contexts,
                                           :member_value => ->(c) { [c.class.model_name.underscore, c.id].join('_') },
                                           :member_label => ->(c) { ('&nbsp;' * 2 * c.depth + c.title).html_safe },
                                           :include_blank => t('permissions.not_selected') %>

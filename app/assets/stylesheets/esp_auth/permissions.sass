@@ -49,19 +49,21 @@ body
       display: none
 
     .collection_list
+
       li
-        +border-radius(4px)
         +clearfix
         border: 1px solid #A17345
         margin: 0 0 15px 0
         padding: 15px 20px
+
+      li.user
+        +border-radius(4px)
 
         ul
           +clearfix
           width: 100%
 
           li
-            +border-radius(none)
             border: none
             margin: 5px 0
             padding: 0
@@ -118,6 +120,9 @@ body
           height: 20px
           padding: 3px 4px
           width: 868px
+
+        #permission_user_search
+          width: 942px
 
 
       .button-group

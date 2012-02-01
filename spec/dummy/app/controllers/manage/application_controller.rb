@@ -1,4 +1,4 @@
-class Manage::ApplicationController < ApplicationController
+class Manage::ApplicationController < EspAuth::ManageController
   def index
   end
 end
