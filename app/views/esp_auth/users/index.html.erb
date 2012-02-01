@@ -1,6 +1,6 @@
 <%= semantic_search_form_for :user, :url => esp_auth.users_path do |form| %>
   <%= form.inputs do %>
-    <%= form.input :keywords, :as => :string, :label => false %>
+    <%= form.input :term, :as => :string, :label => false %>
   <% end %>
   <%= form.buttons do %>
     <li><%= button_tag t('permissions.search'), :class => 'button icon search' %></li>

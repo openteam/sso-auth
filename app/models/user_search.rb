@@ -1,5 +1,5 @@
 class UserSearch < Search
-  column :keywords, :text
+  column :term, :text
   column :permissions_count_gt, :integer
 end
 

@@ -20,8 +20,8 @@ class Permission < ActiveRecord::Base
                                                                           }
 
 
-  before_validation :set_context
   before_validation :set_user
+  before_validation :set_context
 
   after_create :user_index!
   after_destroy :user_index!

@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   devise :omniauthable, :trackable, :timeoutable
 
   searchable do
-    text :name, :email, :nickname, :phone
+    text :term do [name, email, nickname].join(' ') end
     integer :permissions_count
   end
 
