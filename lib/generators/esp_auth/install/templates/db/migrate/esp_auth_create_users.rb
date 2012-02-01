@@ -13,7 +13,6 @@ class EspAuthCreateUsers < ActiveRecord::Migration
                 :phone,
                 :urls
       t.text    :raw_info           # omniauth[:extra]
-      t.integer :permissions_count
 
       # Trackable
       t.integer  :sign_in_count

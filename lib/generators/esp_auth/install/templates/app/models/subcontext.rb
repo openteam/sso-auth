@@ -7,5 +7,4 @@ class Subcontext < ActiveRecord::Base
   def depth
     context.depth + 1
   end
-
 end

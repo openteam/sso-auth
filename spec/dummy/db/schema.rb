@@ -11,10 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131114634) do
+ActiveRecord::Schema.define(:version => 20120201163515) do
 
   create_table "contexts", :force => true do |t|
-    t.string   "type"
     t.string   "title"
     t.string   "ancestry"
     t.string   "weight"
@@ -56,7 +55,6 @@ ActiveRecord::Schema.define(:version => 20120131114634) do
     t.text     "phone"
     t.text     "urls"
     t.text     "raw_info"
-    t.integer  "permissions_count"
     t.integer  "sign_in_count"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"

@@ -1,7 +1,6 @@
 class Ability
   include CanCan::Ability
 
-
   def initialize(user)
 
     return unless user
@@ -22,11 +21,19 @@ class Ability
       can? :manage, permission.context
     end
 
-    can :create, Permission do | permission |
+    can :new, Permission do | permission |
       user.manager?
     end
 
-    can :manage, User do
+    can [:search, :index], User do
+      user.manager?
+    end
+
+    can :manage, :application do
+      user.permissions.exists?
+    end
+
+    can :manage, :permissions do
       user.manager?
     end
   end

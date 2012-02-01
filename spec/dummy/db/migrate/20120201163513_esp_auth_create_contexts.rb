@@ -1,7 +1,6 @@
 class EspAuthCreateContexts < ActiveRecord::Migration
   def change
     create_table :contexts do |t|
-      t.string :type
       t.string :title
       t.string :ancestry
       t.string :weight
