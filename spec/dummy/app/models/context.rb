@@ -7,15 +7,10 @@ class Context < ActiveRecord::Base
   has_many :subcontexts
   has_many :permissions, :as => :context
 
-  scope :for_user, ->(user) { joins(:permissions).where(:permissions => {:user_id => user}) }
 
   alias_attribute :to_s, :title
 
   has_ancestry
-
-  def self.available_for(user)
-    @available_contexts ||= for_user(user).map(&:subtree).flatten.uniq.map{|c| c.respond_to?(:subcontexts) ? [c]+c.subcontexts : c }.flatten
-  end
 
 end
 # == Schema Information

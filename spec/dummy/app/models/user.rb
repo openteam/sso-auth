@@ -24,6 +24,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def contexts
+    permissions.map(&:context).uniq
+  end
+
+  def contexts_tree
+    contexts.flat_map{|c| c.respond_to?(:subtree) ? c.subtree : c}
+            .uniq
+            .flat_map{|c| c.respond_to?(:subcontexts) ? [c] + c.subcontexts : c }
+            .uniq
+  end
+
 end
 
 

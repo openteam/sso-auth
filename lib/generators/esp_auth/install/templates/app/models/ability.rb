@@ -10,11 +10,11 @@ class Ability
     end
 
     can :manage, Permission do | permission |
-      user.manager_of? permission.context
+      permission.context && user.manager_of?(permission.context)
     end
 
-    can :new, Permission do | permission |
-      user.manager?
+    can [:new, :create], Permission do | permission |
+      !permission.context && user.manager?
     end
 
     can [:search, :index], User do

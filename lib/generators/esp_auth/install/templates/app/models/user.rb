@@ -19,9 +19,20 @@ class User < ActiveRecord::Base
     define_method "#{role}_of?" do |context|
       permissions.for_role(role).for_context_and_ancestors(context).exists?
     end
-    define_method "#{role}?"
+    define_method "#{role}?" do
       permissions.for_role(role).exists?
     end
+  end
+
+  def contexts
+    permissions.map(&:context).uniq
+  end
+
+  def contexts_tree
+    contexts.flat_map{|c| c.respond_to?(:subtree) ? c.subtree : c}
+            .uniq
+            .flat_map{|c| c.respond_to?(:subcontexts) ? [c] + c.subcontexts : c }
+            .uniq
   end
 
 end
