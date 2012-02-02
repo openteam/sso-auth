@@ -1,60 +1,60 @@
 @import 'compass/utilities'
 @import 'compass/css3'
 
-$espp_body_margin_top: 35px !default
-$espp_body_margin_bottom: 40px !default
+$esp_auth_body_margin_top: 35px !default
+$esp_auth_body_margin_bottom: 40px !default
 
-$espp_font_size: 11px !default
-$espp_font_family: Arial, Verdana, sans-serif !default
+$esp_auth_font_size: 11px !default
+$esp_auth_font_family: Arial, Verdana, sans-serif !default
 
-$espp_text_color: #000 !default
-$espp_background_color: window !default
-$espp_link_color: #031074 !default
-$espp_underline_link: true !default
-$espp_hover_link_color: #000055 !default
-$espp_underline_hover_link: false !default
+$esp_auth_text_color: #000 !default
+$esp_auth_background_color: window !default
+$esp_auth_link_color: #031074 !default
+$esp_auth_underline_link: true !default
+$esp_auth_hover_link_color: #000055 !default
+$esp_auth_underline_hover_link: false !default
 
 body
-  margin-top: $espp_body_margin_top
-  margin-bottom: $espp_body_margin_bottom
+  margin-top: $esp_auth_body_margin_top
+  margin-bottom: $esp_auth_body_margin_bottom
 
 =fixed_block
   +nested-reset
   +single-box-shadow
-  font-size: $espp_font_size
-  font-family: $espp_font_family
-  background-color: $espp_background_color
+  font-size: $esp_auth_font_size
+  font-family: $esp_auth_font_family
+  background-color: $esp_auth_background_color
   line-height: 1.5
-  color: $espp_text_color
+  color: $esp_auth_text_color
   position: fixed
   width: 100%
   z-index: 99999
   a
-    color: $espp_link_color
-    @if $espp_underline_link
+    color: $esp_auth_link_color
+    @if $esp_auth_underline_link
       text-decoration: underline
     @else
       text-decoration: none
     &:hover
-      color: $espp_hover_link_color
-      @if $espp_underline_hover_link
+      color: $esp_auth_hover_link_color
+      @if $esp_auth_underline_hover_link
         text-decoration: underline
       @else
         text-decoration: none
     &.selected
-      color: $espp_text_color
-      @if $espp_underline_link
+      color: $esp_auth_text_color
+      @if $esp_auth_underline_link
         text-decoration: none
       @else
         text-decoration: underline
 
-.espp_header_wrapper
+.esp_auth_header_wrapper
   +fixed_block
   top: 0
   left: 0
   border-bottom: 1px solid #999
 
-  .espp_header
+  .esp_auth_header
     +clearfix
     margin: 5px 10px
     .navigation
@@ -67,13 +67,13 @@ body
         margin-right: 5px
 
 
-.espp_footer_wrapper
+.esp_auth_footer_wrapper
   +fixed_block
   bottom: 0
   left: 0
   border-top: 1px solid #999
 
-  .espp_footer
+  .esp_auth_footer
     +clearfix
     margin: 5px 10px
     .info
