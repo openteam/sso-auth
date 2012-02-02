@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     define_method "#{role}_of?" do |context|
       permissions.for_role(role).for_context_and_ancestors(context).exists?
     end
-    define_method "#{role}?" do | role |
+    define_method "#{role}?"
       permissions.for_role(role).exists?
     end
   end

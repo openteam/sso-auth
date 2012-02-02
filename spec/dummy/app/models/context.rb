@@ -5,8 +5,7 @@ class Context < ActiveRecord::Base
   attr_accessible :id, :title, :ancestry, :weight, :parent
 
   has_many :subcontexts
-  has_many :permissions
-  has_many :users, :through => :permissions
+  has_many :permissions, :as => :context
 
   scope :for_user, ->(user) { joins(:permissions).where(:permissions => {:user_id => user}) }
 
