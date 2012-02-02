@@ -6,7 +6,7 @@ module EspAuth
       begin
         Settings.resolve!
       rescue => e
-        puts 'WARNING! #{e.message}'
+        puts "WARNING! #{e.message}"
       end
     end
 
@@ -19,6 +19,22 @@ module EspAuth
 
       Devise.setup do |config|
         config.omniauth :identity, Settings['sso.key'], Settings['sso.secret'], :client_options => {:site => Settings['sso.url']}
+      end
+    end
+
+    config.to_prepare do
+      ActionController::Base.class_eval do
+        def self.esp_load_and_authorize_resource
+          inherit_resources
+          load_and_authorize_resource
+
+          before_filter :authenticate_user!
+          before_filter :authorize_user_can_manage_application!
+        end
+        protected
+        def authorize_user_can_manage_application!
+            authorize! :manage, :application
+        end
       end
     end
   end

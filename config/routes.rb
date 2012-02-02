@@ -9,6 +9,7 @@ EspAuth::Engine.routes.draw do
 
   get 'sign_out' => 'sessions#destroy', :as => :destroy_user_session
 
+  root :to => 'users#index'
 end
 
 Rails.application.routes.draw do
