@@ -13,10 +13,6 @@ class Context < ActiveRecord::Base
 
   has_ancestry
 
-  searchable do
-    text :title
-  end
-
   def self.available_for(user)
     @available_contexts ||= for_user(user).map(&:subtree).flatten.uniq.map{|c| c.respond_to?(:subcontexts) ? [c]+c.subcontexts : c }.flatten
   end
