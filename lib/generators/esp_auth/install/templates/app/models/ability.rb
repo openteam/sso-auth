@@ -6,11 +6,11 @@ class Ability
 
     ## common
     can :manage, Context do | context |
-      user.manager_of?(context)
+      user.manager_of? context
     end
 
     can :manage, Permission do | permission |
-      can? :manage, permission.context
+      user.manager_of? permission.context
     end
 
     can :new, Permission do | permission |
@@ -31,11 +31,11 @@ class Ability
 
     ## app specific
     can :manage, Subcontext do | subcontext |
-      can? :manage, subcontext.context
+      user.manager_of? subcontext.context
     end
 
     can :manage, Subcontext do | subcontext |
-      user.manager_of?(subcontext)
+      user.manager_of? subcontext
     end
   end
 end
