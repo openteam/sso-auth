@@ -1,7 +1,6 @@
 <div class='esp_auth_footer_wrapper'>
   <div class='esp_auth_footer'>
     <div class='info'>
-      <%= [request.remote_addr, request.remote_ip].join(', ').split(', ').uniq.join(', ') %>
       <%= request.env['HTTP_USER_AGENT'] %>
     </div>
     <div class='developer'>
