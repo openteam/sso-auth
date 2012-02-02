@@ -13,18 +13,40 @@ module EspAuth
       @another_user ||= User.create! :uid => 2, :name => 'Another user'
     end
 
-    def subcontext(context)
-      @subcontext ||= Subcontext.create!(:context => context).tap do | subcontext |
-                        another_user.permissions.create! :context => subcontext, :role => :manager
-                      end
+    def create_context(parent=nil)
+      Context.create! :title => 'context', :parent => parent
     end
 
-    Permission.enums[:role].each do | role |
-      define_method "another_#{role}_of" do |context|
-        another_user.tap do | another_user |
-          another_user.permissions.create! :context => context, :role => role
-        end
-      end
+    def create_subcontext(context)
+      Subcontext.create! :title => 'subcontext', :context => context
+    end
+
+    def root
+      @root ||= create_context
+    end
+
+    def child_1
+      @child_1 ||= create_context root
+    end
+
+    def child_1_1
+      @child_1_1 ||= create_context child_1
+    end
+
+    def child_1_2
+      @child_1_2 ||= create_context child_1
+    end
+
+    def child_2
+      @child_2 ||= create_context root
+    end
+
+    def subcontext(context)
+      @subcontext ||= create_subcontext(context)
+    end
+
+    def another_subcontext(context)
+      @another_subcontext ||= create_subcontext(context)
     end
 
     Permission.enums[:role].each do | role |
@@ -35,24 +57,12 @@ module EspAuth
       end
     end
 
-    def root
-      @root ||= Context.create! :title => 'root'
-    end
-
-    def child_1
-      @child_1 ||= Context.create! :title => 'child_1', :parent => root
-    end
-
-    def child_1_1
-      @child_1_1 ||= Context.create! :title => 'child_1_1', :parent => child_1
-    end
-
-    def child_1_2
-      @child_1_2 ||= Context.create! :title => 'child_1_2', :parent => child_1
-    end
-
-    def child_2
-      @child_2 ||= Context.create! :title => 'child_2', :parent => root
+    Permission.enums[:role].each do | role |
+      define_method "another_#{role}_of" do |context|
+        another_user.tap do | another_user |
+          another_user.permissions.create! :context => context, :role => role
+        end
+      end
     end
   end
 end
