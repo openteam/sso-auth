@@ -25,11 +25,13 @@ module EspAuth
     config.to_prepare do
       ActionController::Base.class_eval do
         def self.esp_load_and_authorize_resource
-          inherit_resources
-          load_and_authorize_resource
-
           before_filter :authenticate_user!
           before_filter :authorize_user_can_manage_application!
+          inherit_resources
+          load_and_authorize_resource
+          rescue_from CanCan::AccessDenied do |exception|
+            render :file => "#{Rails.root}/public/403", :formats => [:html], :status => 403, :layout => false
+          end
         end
         protected
         def authorize_user_can_manage_application!
