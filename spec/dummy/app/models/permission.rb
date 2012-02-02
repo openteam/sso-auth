@@ -4,7 +4,7 @@ class Permission < ActiveRecord::Base
   belongs_to :context, :polymorphic => true
   belongs_to :user
 
-  scope :for_roles, ->(*roles) { where(:role => roles) }
+  scope :for_role, ->(role) { where(:role => role) }
   scope :for_context_ancestors, ->(context, ids=context.ancestor_ids) do
     where(:context_id => ids,
           :context_type => (context.class.ancestors - context.class.included_modules).map(&:name))

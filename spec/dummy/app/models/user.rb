@@ -15,12 +15,13 @@ class User < ActiveRecord::Base
     integer :permissions_count do permissions.count end
   end
 
-  def manager?
-    permissions.for_roles(:manager).exists?
-  end
-
-  def manager_of?(context)
-    permissions.for_roles(:manager).for_context_and_ancestors(context).exists?
+  Permission.enums[:role].each do | role |
+    define_method "#{role}_of?" do |context|
+      permissions.for_role(role).for_context_and_ancestors(context).exists?
+    end
+    define_method "#{role}?" do | role |
+      permissions.for_role(role).exists?
+    end
   end
 
 end
