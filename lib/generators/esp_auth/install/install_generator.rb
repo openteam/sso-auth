@@ -38,10 +38,10 @@ module EspAuth
       end
 
       def create_migrations
-        migration_template 'db/migrate/esp_auth_create_users.rb'
-        migration_template 'db/migrate/esp_auth_create_contexts.rb'
-        migration_template 'db/migrate/esp_auth_create_permissions.rb'
-        migration_template 'db/migrate/esp_auth_create_subcontexts.rb'
+        migration_template 'db/migrate/create_users.rb'
+        migration_template 'db/migrate/create_contexts.rb'
+        migration_template 'db/migrate/create_permissions.rb'
+        migration_template 'db/migrate/create_subcontexts.rb'
       end
 
     end

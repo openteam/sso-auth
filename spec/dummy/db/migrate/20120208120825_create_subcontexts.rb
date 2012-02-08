@@ -1,4 +1,4 @@
-class EspAuthCreateSubcontexts < ActiveRecord::Migration
+class CreateSubcontexts < ActiveRecord::Migration
   def change
     create_table :subcontexts do |t|
       t.string :title

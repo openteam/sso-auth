@@ -1,4 +1,4 @@
-class EspAuthCreatePermissions < ActiveRecord::Migration
+class CreatePermissions < ActiveRecord::Migration
   def change
     create_table :permissions do |t|
       t.references :user
