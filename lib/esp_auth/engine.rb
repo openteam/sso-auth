@@ -81,6 +81,9 @@ module EspAuth
             .uniq
           end
 
+          def to_s
+            email? ? "#{name} <#{email}>" : name
+          end
         end
       end
     end
