@@ -1,10 +1,6 @@
 class User < ActiveRecord::Base
-
-  esp_authable
-
+  esp_auth_user
 end
-
-
 
 # == Schema Information
 #

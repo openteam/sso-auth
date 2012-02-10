@@ -1,18 +1,7 @@
 class Context < ActiveRecord::Base
-
-  default_scope order('weight')
-
-  attr_accessible :id, :title, :ancestry, :weight, :parent
-
-  has_many :subcontexts
-  has_many :permissions, :as => :context
-
-
-  alias_attribute :to_s, :title
-
-  has_ancestry
-
+  esp_auth_context
 end
+
 # == Schema Information
 #
 # Table name: contexts
