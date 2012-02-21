@@ -60,7 +60,7 @@ module EspAuth
       end
       define_method "another_#{role}_of" do |context|
         another_user.tap do | another_user |
-          another_user.permissions.create!(:context => context, :role => role) unless user.send("#{role}_of?", context)
+          another_user.permissions.create!(:context => context, :role => role) unless another_user.send("#{role}_of?", context)
         end
       end
       define_method "another_#{role}" do
