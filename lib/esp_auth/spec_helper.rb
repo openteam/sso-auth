@@ -55,13 +55,16 @@ module EspAuth
           user.permissions.create!(:context => context, :role => role) unless user.send("#{role}_of?", context)
         end
       end
-    end
-
-    Permission.enums[:role].each do | role |
+      define_method "#{role}" do
+        self.send("#{role}_of", root)
+      end
       define_method "another_#{role}_of" do |context|
         another_user.tap do | another_user |
-          another_user.permissions.create! :context => context, :role => role
+          another_user.permissions.create!(:context => context, :role => role) unless user.send("#{role}_of?", context)
         end
+      end
+      define_method "another_#{role}" do
+        self.send("another_#{role}_of", root)
       end
     end
   end

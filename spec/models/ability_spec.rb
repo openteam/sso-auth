@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Ability do
   context 'менеджер' do
     context 'корневого контекста' do
-      subject { ability_for(manager_of(root)) }
+      subject { ability_for(manager) }
 
       context 'управление контекстами' do
         it { should     be_able_to(:manage, root) }
