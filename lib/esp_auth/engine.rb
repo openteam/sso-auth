@@ -94,7 +94,7 @@ module EspAuth
         end
 
         def self.esp_auth_permission
-          attr_accessor :user_search, :user_uid, :user_name, :user_email, :polimorphic_context
+          attr_accessor :user_search, :user_uid, :user_name, :user_email, :polymorphic_context
 
           belongs_to :context, :polymorphic => true
           belongs_to :user
@@ -117,12 +117,12 @@ module EspAuth
           end
 
           after_initialize :set_user, :if => :user_uid_present?
-          after_initialize :set_context, :if => :polimorphic_context_present?
+          after_initialize :set_context, :if => :polymorphic_context_present?
 
           after_create :user_index!
           after_destroy :user_index!
 
-          validates_presence_of :polimorphic_context, :unless => :context
+          validates_presence_of :polymorphic_context, :unless => :context
 
           validates_presence_of :role, :user, :context
 
@@ -135,7 +135,7 @@ module EspAuth
 
           private
             delegate :index!, :to => :user, :prefix => true
-            delegate :present?, :to => :polimorphic_context, :prefix => true
+            delegate :present?, :to => :polymorphic_context, :prefix => true
             delegate :present?, :to => :user_uid, :prefix => true
 
             define_method :set_user do
@@ -145,7 +145,7 @@ module EspAuth
             end
 
             define_method :set_context do
-              underscored_context_type, self.context_id = polimorphic_context.match(/(\w+)_(\d+)/)[1..2]
+              underscored_context_type, self.context_id = polymorphic_context.match(/(\w+)_(\d+)/)[1..2]
               self.context_type = underscored_context_type.camelize
             end
         end

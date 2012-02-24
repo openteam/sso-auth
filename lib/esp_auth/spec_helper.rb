@@ -5,12 +5,26 @@ module EspAuth
       Ability.new(user)
     end
 
+    def create_user
+      @sequence ||= 0
+      @sequence += 1
+      User.create! :uid => @sequence, :name => "user #{@sequence}"
+    end
+
+    def user_with_role(role, context=root, prefix=nil)
+      @roles ||= {}
+      @roles["#{prefix}_#{role}"] ||= {}
+      @roles["#{prefix}_#{role}"][context] ||= create_user.tap do |user|
+        user.permissions.create! :context => context, :role => role
+      end
+    end
+
     def user
-      @user ||= User.create! :uid => 1, :name => 'User'
+      @user ||= create_user
     end
 
     def another_user
-      @another_user ||= User.create! :uid => 2, :name => 'Another user'
+      @another_user ||= create_user
     end
 
     def create_context(parent=nil)
@@ -51,17 +65,13 @@ module EspAuth
 
     Permission.enums[:role].each do | role |
       define_method "#{role}_of" do |context|
-        user.tap do | user |
-          user.permissions.create!(:context => context, :role => role) unless user.send("#{role}_of?", context)
-        end
+        user_with_role role, context
       end
       define_method "#{role}" do
         self.send("#{role}_of", root)
       end
       define_method "another_#{role}_of" do |context|
-        another_user.tap do | another_user |
-          another_user.permissions.create!(:context => context, :role => role) unless another_user.send("#{role}_of?", context)
-        end
+        user_with_role role, context, "another"
       end
       define_method "another_#{role}" do
         self.send("another_#{role}_of", root)
