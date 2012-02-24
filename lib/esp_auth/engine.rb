@@ -153,7 +153,7 @@ module EspAuth
         def self.esp_auth_context(options={})
           default_scope order('weight')
           attr_accessible :id, :title, :ancestry, :weight, :parent
-          has_many :subcontexts, options
+          has_many :subcontexts, :class_name => options[:subcontext] unless options[:subcontext] == false
           has_many :permissions, :as => :context
           has_ancestry
 
