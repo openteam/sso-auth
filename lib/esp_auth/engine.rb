@@ -39,9 +39,9 @@ module EspAuth
 
           def polymorphic_context_tree_for(form)
             form.input :polymorphic_context,  :as => :select,
-                                              :collection => current_user.contexts_tree,
+                                              :collection => current_user.context_tree,
                                               :member_value => ->(c) { [c.class.model_name.underscore, c.id].join('_') },
-                                              :member_label => ->(c) { ('&nbsp;' * 2 * c.depth + c.title).html_safe },
+                                              :member_label => ->(c) { ('&nbsp;' * 2 * c.absolute_depth + c.title).html_safe },
                                               :include_blank => t('commons.not_selected')
           end
       end
@@ -81,11 +81,16 @@ module EspAuth
             permissions.map(&:context).uniq
           end
 
-          define_method :contexts_tree do
-            contexts.flat_map{|c| c.respond_to?(:subtree) ? c.subtree : c}
-            .uniq
-            .flat_map{|c| c.respond_to?(:subcontexts) ? [c] + c.subcontexts : c }
-            .uniq
+          define_method :context_tree do
+            instance_variable_get(:@context_tree) || instance_variable_set(:@context_tree, contexts
+                                                                                          .flat_map{|c| c.respond_to?(:subtree) ? c.subtree : c}
+                                                                                          .uniq
+                                                                                          .flat_map{|c| c.respond_to?(:subcontexts) ? [c] + c.subcontexts : c }
+                                                                                          .uniq)
+          end
+
+          define_method :context_tree_of do | klass |
+            context_tree.select{|node| node.is_a?(klass)}
           end
 
           define_method :to_s do
@@ -157,6 +162,7 @@ module EspAuth
           has_many :permissions, :as => :context
           has_ancestry
 
+          alias_method :absolute_depth, :depth
           alias_attribute :to_s, :title
         end
 
@@ -166,7 +172,7 @@ module EspAuth
 
           alias_attribute :to_s, :title
 
-          def depth
+          def absolute_depth
             context.depth + 1
           end
         end
