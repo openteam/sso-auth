@@ -42,7 +42,10 @@ module EspAuth
                                               :collection => current_user.context_tree,
                                               :member_value => ->(c) { [c.class.model_name.underscore, c.id].join('_') },
                                               :member_label => ->(c) { ('&nbsp;' * 2 * c.absolute_depth + c.title).html_safe },
-                                              :include_blank => t('commons.not_selected')
+                                              :include_blank => t('commons.not_selected'),
+                                              :selected => form.object.respond_to?(:selected_context) ? form.object.selected_context : nil,
+                                              :disabled => form.object.respond_to?(:disabled_contexts) ? form.object.disabled_contexts : []
+
           end
       end
       ActiveRecord::Base.class_eval do
