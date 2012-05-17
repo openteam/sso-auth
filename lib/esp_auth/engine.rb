@@ -34,7 +34,7 @@ module EspAuth
 
         protected
           def authorize_user_can_manage_application!
-              authorize! :manage, :application
+            authorize! :manage, :application
           end
 
           def polymorphic_context_tree_for(form)
@@ -110,7 +110,7 @@ module EspAuth
           scope :for_role, ->(role) { where(:role => role) }
           scope :for_context_ancestors, ->(context, ids=context.ancestor_ids) do
             where(:context_id => ids,
-                  :context_type => (context.class.ancestors - context.class.included_modules).map(&:name))
+                  :context_type => (context.class.ancestors + context.class.descendants - context.class.included_modules).map(&:name))
           end
           scope :for_context, ->(context) { where(:context_id => context.id, :context_type => context.class) }
 
