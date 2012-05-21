@@ -107,12 +107,13 @@ module EspAuth
           belongs_to :context, :polymorphic => true
           belongs_to :user
 
+          scope :empty, -> { where('0 = 1') }
           scope :for_role, ->(role) { where(:role => role) }
           scope :for_context_ancestors, ->(context, ids=context.ancestor_ids) do
             where(:context_id => ids,
                   :context_type => (context.class.ancestors + context.class.descendants - context.class.included_modules).map(&:name))
           end
-          scope :for_context, ->(context) { where(:context_id => context.id, :context_type => context.class) }
+          scope :for_context, ->(context) { context ? where(:context_id => context.id, :context_type => context.class) : empty }
 
           scope :for_context_type, ->(context_type) { where(:context_type => context_type) }
 
