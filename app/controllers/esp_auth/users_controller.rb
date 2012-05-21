@@ -6,7 +6,8 @@ class EspAuth::UsersController < EspAuth::ApplicationController
   has_scope :page, :default => 1
 
   def search
-    render :json => JSON.parse(Curl::Easy.http_get("#{Settings['sso.url']}/users.json?user_search[keywords]=#{URI.escape(params[:term])}").body_str) and return
+    url = "#{Settings['sso.url']}/users.json?user_search[keywords]=#{URI.escape(params[:term])}"
+    render :json => JSON.parse(Requester.new(url).response_body) and return
   end
 
   protected
