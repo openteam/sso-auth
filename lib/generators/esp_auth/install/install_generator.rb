@@ -25,7 +25,6 @@ module EspAuth
       end
 
       def create_config
-        template 'config/schedule.rb'
         template 'config/locales/permissions_enum.ru.yml'
       end
 

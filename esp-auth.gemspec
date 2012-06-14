@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'kaminari'
   s.add_dependency 'progress_bar'
   s.add_dependency 'sunspot_rails'
-  s.add_dependency 'whenever'
 
   s.add_development_dependency 'rails'
   s.add_development_dependency 'sass'
