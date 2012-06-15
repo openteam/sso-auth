@@ -5,6 +5,8 @@ EspAuth::Engine.routes.draw do
     resources :permissions, :only => [:new, :create]
   end
 
+  resources :audits, :only => :index
+
   match '/users/search' => "users#search"
 
   get 'sign_out' => 'sessions#destroy', :as => :destroy_user_session

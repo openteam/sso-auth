@@ -12,7 +12,10 @@
           <% end %>
         <% end %>
         <% if can? :manage, :permissions %>
-          <%= link_to 'Права доступа', esp_auth.root_path, :class => controller_namespace[0].esp_auth? ? 'selected' : nil %>
+          <%= link_to 'Права доступа', esp_auth.root_path, :class => controller_namespace[0].esp_auth? && controller_name != 'audits'? 'selected' : nil %>
+        <% end %>
+        <% if current_user.manager_of?(::Context.first) %>
+          <%= link_to 'Журнал операций', esp_auth.audits_path, :class => controller_namespace[0].esp_auth? && controller_name == 'audits' ? 'selected' : nil %>
         <% end %>
       </div>
       <div class='auth'>

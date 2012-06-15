@@ -15,7 +15,9 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'README.rdoc']
 
   s.add_dependency 'ancestry'
+  s.add_dependency 'audited-activerecord'
   s.add_dependency 'cancan'
+  s.add_dependency 'coffee-rails'
   s.add_dependency 'default_value_for'
   s.add_dependency 'devise'
   s.add_dependency 'devise-russian'

@@ -94,6 +94,30 @@ body
         +clearfix
         line-height: 26px
 
+    .journal
+      width: 100%
+      th
+        font-size: 14px
+        background-color: #ddd
+        border: 1px solid #ccc
+        padding: 8px
+      td
+        border: 1px solid #ccc
+        padding: 8px
+        &.small
+          width: 1%
+          white-space: nowrap
+      .changes
+        width: 1%
+        white-space: nowrap
+        text-align: center
+        a
+          text-decoration: underline
+          &:hover
+            text-decoration: none
+      .hidden
+        display: none
+
     .formtastic
       .inline-errors
         background: transparent image_url("esp_auth/inline_error_arrow.png") no-repeat left center
@@ -148,3 +172,7 @@ body
       .buttons
         +clearfix
         margin: 2px 0 0 0
+
+div.changes_detail
+  pre
+    font-family: monospace

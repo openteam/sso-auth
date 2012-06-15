@@ -9,7 +9,7 @@
 </head>
 <body>
   <%= render :partial => "esp_auth/shared/header" %>
-  <h1><%= t('permissions.title') %></h1>
+  <h1><%= yield(:esp_auth_title).presence || t('permissions.title') %></h1>
   <div class="container">
     <%= yield %>
   </div>
