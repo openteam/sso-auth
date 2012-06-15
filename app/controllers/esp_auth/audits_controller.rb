@@ -15,6 +15,6 @@ class EspAuth::AuditsController < ApplicationController
     end
 
     def end_of_association_chain
-      resource_class.order(:id)
+      apply_scopes(resource_class.unscoped.order('id desc')).per(20)
     end
 end
