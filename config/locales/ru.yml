@@ -36,4 +36,5 @@ ru:
       audit:
         update:                 обновление
         create:                 создание
+        destroy:                удаление
 

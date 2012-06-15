@@ -2,8 +2,8 @@
   <td class="small"><%= l audit.created_at %></td>
   <td><%= audit.user %></td>
   <td class="small">
-    <%= audit.auditable.class.model_name.human.mb_chars.capitalize %>
-    #<%= audit.auditable.id %>
+    <%= audit.auditable_type.constantize.model_name.human.mb_chars.capitalize %>
+    #<%= audit.auditable_id %>
   </td>
   <td class="changes">
     <a href="#">show me</a>
