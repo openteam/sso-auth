@@ -1,6 +1,7 @@
 require "esp_auth/engine"
 
 require 'ancestry'
+require 'audited-activerecord'
 require 'cancan'
 require 'devise'
 require 'devise-russian'
