@@ -11,7 +11,7 @@ class EspAuth::AuditsController < ApplicationController
 
   protected
     def authorize_user_can_view_audits!
-      render :file => "#{Rails.root}/public/403", :formats => [:html], :status => 403, :layout => false unless can?(:manage, Context.first)
+      render :file => "#{Rails.root}/public/403", :formats => [:html], :status => 403, :layout => false unless can?(:manage, :audits)
     end
 
     def end_of_association_chain
