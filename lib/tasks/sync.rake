@@ -10,7 +10,7 @@ namespace :esp_auth do
     bar = ProgressBar.new(remotes.count + (Context.pluck('id') - remotes.map{|r| r['id']}).count)
 
     Context.record_timestamps = false
-    updated_at = DateTime.now
+    updated_at = Time.zone.now
 
     remotes.each do |remote|
       Timecop.freeze(updated_at) do
