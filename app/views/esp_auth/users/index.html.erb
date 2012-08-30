@@ -33,7 +33,7 @@
             <ul>
               <% permissions.each do |permission| %>
                 <li>
-                  <%= permission.context %>
+                  <%= permission.context.respond_to?(:esp_to_s) ? permission.context.esp_to_s : permission.context %>
                   <%= link_to t('commons.delete'),
                     esp_auth.permission_path(permission),
                     :method => :delete,
