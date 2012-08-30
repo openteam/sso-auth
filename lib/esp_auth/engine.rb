@@ -41,7 +41,7 @@ module EspAuth
             form.input :polymorphic_context,  :as => :select,
                                               :collection => current_user.context_tree,
                                               :member_value => ->(c) { [c.class.model_name.underscore, c.id].join('_') },
-                                              :member_label => ->(c) { ('&nbsp;' * 2 * c.absolute_depth + c.title).html_safe },
+                                              :member_label => ->(c) { ('&nbsp;' * 2 * c.absolute_depth + (c.respond_to?(:esp_title) ? c.esp_title : c.title)).html_safe },
                                               :include_blank => t('commons.not_selected'),
                                               :selected => form.object.respond_to?(:selected_context) ? form.object.selected_context : nil,
                                               :disabled => form.object.respond_to?(:disabled_contexts) ? form.object.disabled_contexts : []
