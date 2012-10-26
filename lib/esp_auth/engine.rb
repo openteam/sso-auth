@@ -59,6 +59,8 @@ module EspAuth
 
           devise :omniauthable, :trackable, :timeoutable
 
+          validates_presence_of :uid
+
           searchable do
             integer :uid
             text :term do [name, email, nickname].join(' ') end
