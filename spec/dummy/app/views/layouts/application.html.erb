@@ -2,13 +2,10 @@
 <html>
 <head>
   <title>Dummy</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render :partial => "sso_auth/shared/header" %>
+  <%= render :partial => "sso_auth/shared/user_box" %>
   <%= yield %>
-  <%= render :partial => "sso_auth/shared/footer" %>
 </body>
 </html>
