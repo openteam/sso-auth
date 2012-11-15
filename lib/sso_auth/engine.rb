@@ -4,6 +4,10 @@ module SsoAuth
 
     config.after_initialize do
       begin
+        Settings.define 'sso.url',     :env_var => 'SSO_URL',     :require => true
+        Settings.define 'sso.key',     :env_var => 'SSO_KEY',     :require => true
+        Settings.define 'sso.secret',  :env_var => 'SSO_SECRET',  :require => true
+
         Settings.resolve!
       rescue => e
         puts "WARNING! #{e.message}"

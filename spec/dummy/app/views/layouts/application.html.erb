@@ -6,6 +6,13 @@
 </head>
 <body>
   <%= render :partial => "sso_auth/shared/user_box" %>
+  <% flash.keys.each do |key| %>
+    <hr>
+    <%= content_tag(:div, :class => key) do %>
+      <%= flash[key] %>
+    <% end %>
+  <% end %>
+  <hr>
   <%= yield %>
 </body>
 </html>

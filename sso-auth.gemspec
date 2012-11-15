@@ -14,15 +14,14 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'README.rdoc']
 
-  s.add_dependency 'ancestry'
-  s.add_dependency 'audited-activerecord'
   s.add_dependency 'cancan'
+  s.add_dependency 'configliere'
   s.add_dependency 'default_value_for'
   s.add_dependency 'devise'
-  s.add_dependency 'devise-russian'
   s.add_dependency 'omniauth'
   s.add_dependency 'omniauth-oauth2'
 
+  s.add_development_dependency 'devise-russian'
   s.add_development_dependency 'rails'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'russian'

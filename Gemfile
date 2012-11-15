@@ -2,10 +2,10 @@ source :rubygems
 
 gemspec
 
-gem 'compass'
-gem 'jquery-rails'
-gem 'russian'
-gem 'configliere'
+gem 'oauth2', '0.6.1'
+gem 'omniauth',  '1.1.0'
+gem 'omniauth-oauth2', '1.0.2'
+
 
 group :test do
   gem 'fabrication'

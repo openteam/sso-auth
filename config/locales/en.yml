@@ -1,0 +1,11 @@
+ru:
+  activerecord:
+    attributes:
+      permission:
+        context:              Context
+        role:                 Role
+        user:                 User
+
+    models:
+      permission:             Permission
+
