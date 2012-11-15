@@ -2,39 +2,10 @@ ru:
   activerecord:
     attributes:
       permission:
-        polymorphic_context:  Контекст
-        context:              Категория
+        context:              Контекст
         role:                 Роль
-        user_search:          Пользователь
+        user:                 Пользователь
 
     models:
       permission:             Право доступа
-
-  views:
-    pagination:
-      next:                   "&rarr;"
-      last:                   Последняя страница
-      previous:               "&larr;"
-      first:                  Первая страница
-      truncate:               ...
-
-  permissions:
-    'You are adding role to': Вы добавляете роль для
-    back_to_manage:           Назад в раздел управления контентом
-    cancel:                   Отмена
-    create:                   Создать
-    create_permission:        Создать право доступа
-    delete:                   Удалить
-    new:                      Добавить право доступа
-    search:                   Поиск
-    show_permissions:         Показать права доступа
-    sign_out:                 Выход
-    title:                    Управление правами доступа
-
-  esp_auth:
-    audits:
-      audit:
-        update:                 обновление
-        create:                 создание
-        destroy:                удаление
 

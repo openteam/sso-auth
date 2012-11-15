@@ -13,11 +13,11 @@ Spork.prefork do
   SPEC_ROOT = Rails.root.join('..').to_s
 
   Dir["#{SPEC_ROOT}/fabricators/**/*.rb"].each {|f| require f}
-  require "#{SPEC_ROOT}/../lib/esp_auth/spec_helper"
+  require "#{SPEC_ROOT}/../lib/sso_auth/spec_helper"
 
   RSpec.configure do |config|
    config.use_transactional_fixtures = true
-   config.include EspAuth::SpecHelper
+   config.include SsoAuth::SpecHelper
    config.before(:all) do
      Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)
    end

@@ -1,26 +1,26 @@
-= EspAuth
+= SsoAuth
 
 == Usage
 
 Gemfile
 
-  gem 'esp-auth'
+  gem 'sso-auth'
 
 Layout
 
   <body>
-    <%= render :partial => "esp_auth/shared/header" %>
+    <%= render :partial => "sso_auth/shared/header" %>
     ...
     <%= yield %>
     ...
-    <%= render :partial => "esp_auth/shared/footer" %>
+    <%= render :partial => "sso_auth/shared/footer" %>
   </body>
 
 Stylesheet
 
   *= require ...
-  *= require esp_auth/shared // common styles
-  *= require custom_esp_auth // customize styles
+  *= require sso_auth/shared // common styles
+  *= require custom_sso_auth // customize styles
   */
 
 == License

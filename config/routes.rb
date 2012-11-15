@@ -1,4 +1,4 @@
-EspAuth::Engine.routes.draw do
+SsoAuth::Engine.routes.draw do
   resources :permissions, :only => [:new, :create, :destroy]
 
   resources :users, :only => :index do
@@ -15,13 +15,13 @@ EspAuth::Engine.routes.draw do
 end
 
 Rails.application.routes.draw do
-  devise_for :users, :path => 'auth', controllers: {omniauth_callbacks:'esp_auth/omniauth_callbacks'}, :skip => [:sessions]
+  devise_for :users, :path => 'auth', controllers: {omniauth_callbacks:'sso_auth/omniauth_callbacks'}, :skip => [:sessions]
 
   devise_scope :users do
     get 'sign_in' => redirect('/auth/auth/identity'), :as => :new_user_session
   end
 
-  mount EspAuth::Engine => '/auth'
+  mount SsoAuth::Engine => '/auth'
 
 end rescue NameError
 

@@ -1,10 +1,10 @@
-require 'esp-commons'
+require 'sso-commons'
 require 'progress_bar'
 require 'timecop'
 
 desc "Syncronize blue-pages tree"
 
-namespace :esp_auth do
+namespace :sso_auth do
   task :sync => :environment do
     remotes = JSON.parse(Requester.new("#{Settings['blue-pages.url']}/categories/2.json?sync=true").response_body)
     bar = ProgressBar.new(remotes.count + (Context.pluck('id') - remotes.map{|r| r['id']}).count)
