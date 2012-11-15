@@ -10,4 +10,10 @@ class SsoAuth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     sign_in user, :event => :authentication
     redirect_to stored_location_for(:user) || main_app.root_path
   end
+
+  private
+
+  def after_omniauth_failure_path_for(model)
+    main_app.root_path
+  end
 end
