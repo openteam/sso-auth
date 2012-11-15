@@ -4,7 +4,6 @@ require File.expand_path("../dummy/config/environment", __FILE__)
 require 'rspec/rails'
 require 'cancan/matchers'
 require 'shoulda/matchers'
-require 'fabrication'
 
 SPEC_ROOT = Rails.root.join('..').to_s
 
