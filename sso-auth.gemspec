@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'devise-russian'
   s.add_development_dependency 'rails'
   s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'russian'
   s.add_development_dependency 'shoulda-matchers'
   s.add_development_dependency 'sqlite3'
 end

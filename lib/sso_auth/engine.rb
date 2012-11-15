@@ -17,7 +17,8 @@ module SsoAuth
     initializer "sso_client.devise", :before => 'devise.omniauth' do |app|
       require File.expand_path("../../../lib/omniauth/strategies/identity", __FILE__)
       Devise.setup do |config|
-        config.omniauth :identity, Settings['sso.key'], Settings['sso.secret'], :client_options => {:site => Settings['sso.url']}
+        config.omniauth :identity, Settings['sso.key'], Settings['sso.secret'], :client_options => { :site => Settings['sso.url'] },
+                                                                                :provider_ignores_state => true
       end
     end
 
