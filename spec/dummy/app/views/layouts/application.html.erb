@@ -5,7 +5,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render :partial => "sso_auth/shared/user_box" %>
+  <%= render :partial => "sso-auth/shared/user_box" %>
   <% flash.keys.each do |key| %>
     <%= content_tag(:span, :class => key) do %>
       | <%= key %>: <%= flash[key] %>

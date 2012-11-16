@@ -6,7 +6,7 @@ class SsoAuth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       attributes = request.env['omniauth.auth']['extra']['raw_info']['user']
       attributes = attributes.merge(request.env['omniauth.auth']['info'])
       attributes.each do |attribute, value|
-        user.send("#{attribute}=", value) if respond_to?("#{attribute}=")
+        user.send("#{attribute}=", value) if user.respond_to?("#{attribute}=")
       end
       user.save(:validate => false)
     end
