@@ -40,7 +40,7 @@ module SsoAuth
       end
       ActiveRecord::Base.class_eval do
         def self.sso_auth_user
-          has_many :permissions
+          has_many :permissions, :dependent => :destroy
 
           devise :omniauthable, :trackable, :timeoutable
 
@@ -60,7 +60,7 @@ module SsoAuth
 
         def self.sso_auth_permission(options)
           define_singleton_method :available_roles do
-            options[:roles]
+            options[:roles].map(&:to_s)
           end
 
           belongs_to :context, :polymorphic => true
