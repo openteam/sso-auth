@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'omniauth'
   s.add_dependency 'omniauth-oauth2'
 
+  s.add_development_dependency 'debugger'
   s.add_development_dependency 'devise-russian'
   s.add_development_dependency 'rails'
   s.add_development_dependency 'rspec-rails'
