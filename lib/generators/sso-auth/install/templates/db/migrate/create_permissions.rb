@@ -6,6 +6,6 @@ class CreatePermissions < ActiveRecord::Migration
       t.string :role
       t.timestamps
     end
-    add_index :permissions, [:user_id, :role, :context_id, :context_type], :name => 'by_user_and_role_and_context'
+    add_index :permissions, [:user_id, :role, :context_id, :context_type], :name => 'by_user_and_role_and_context', :uniq => true
   end
 end
