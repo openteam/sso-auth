@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'omniauth'
   s.add_dependency 'omniauth-oauth2'
 
+  s.add_development_dependency 'annotate'
   s.add_development_dependency 'rails'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'shoulda-matchers'
