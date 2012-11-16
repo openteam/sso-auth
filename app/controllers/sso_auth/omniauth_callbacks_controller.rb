@@ -3,7 +3,12 @@
 class SsoAuth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def identity
     user = User.find_or_initialize_by_uid(request.env['omniauth.auth']['uid']).tap do |user|
-      user.update_attributes request.env['omniauth.auth']['info']
+      attributes = request.env['omniauth.auth']['extra']['raw_info']['user']
+      attributes = attributes.merge(request.env['omniauth.auth']['info'])
+      attributes.each do |attribute, value|
+        user.send("#{attribute}=", value) if respond_to?("#{attribute}=")
+      end
+      user.save(:validate => false)
     end
 
     flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "системы аутентификации"
