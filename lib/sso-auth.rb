@@ -1,4 +1,4 @@
-require "sso_auth/engine"
+require "sso-auth/engine"
 
 require 'cancan'
 require 'devise'

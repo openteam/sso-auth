@@ -1,5 +1,5 @@
 module SsoAuth
-  class Engine < Rails::Engine
+  class Engine < ::Rails::Engine
     isolate_namespace SsoAuth
 
     config.after_initialize do
