@@ -23,7 +23,7 @@ module SsoAuth
 
     config.to_prepare do
       ActionController::Base.class_eval do
-        def self.sso_load_and_authorize_resource
+        define_singleton_method :sso_load_and_authorize_resource do
           before_filter :authenticate_user!
           before_filter :authorize_user_can_manage_application!
           load_and_authorize_resource
@@ -34,7 +34,7 @@ module SsoAuth
 
         protected
 
-        def authorize_user_can_manage_application!
+        define_method :authorize_user_can_manage_application! do
           authorize! :manage, :application
         end
       end
@@ -42,11 +42,7 @@ module SsoAuth
         def self.sso_auth_user
           has_many :permissions
 
-          default_value_for :sign_in_count, 0
-
           devise :omniauthable, :trackable, :timeoutable
-
-          delegate :exists?, :to => :permissions, :prefix => true
 
           Permission.available_roles.each do |role|
             define_method "#{role}_of?" do |context|
@@ -57,7 +53,7 @@ module SsoAuth
             end
           end
 
-          define_method :sso_name do
+          define_method :sso_auth_name do
             email? ? "#{name} <#{email}>" : name
           end
         end
@@ -70,12 +66,12 @@ module SsoAuth
           belongs_to :context, :polymorphic => true
           belongs_to :user
 
-          validates_inclusion_of :role, :in => available_roles
-          validates_presence_of :role, :user
+          validates_inclusion_of  :role, :in => available_roles
+          validates_presence_of   :role, :user
           validates_uniqueness_of :role, :scope => [:user_id, :context_id, :context_type]
 
           scope :for_role,    ->(role)    { where(:role => role) }
-          scope :for_context, ->(context) { context ? where(:context_id => context.id, :context_type => context.class) : where(:context_id => nil) }
+          scope :for_context, ->(context) { where(:context_id => context.try(:id), :context_type => context.try(:class)) }
         end
       end
     end

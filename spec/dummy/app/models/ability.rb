@@ -5,7 +5,7 @@ class Ability
     return unless user
 
     can :manage, :application do
-      user.permissions_exists?
+      user.permissions.exists?
     end
 
     can :manage, :permissions do

@@ -15,17 +15,11 @@ module SsoAuth
       def create_models
         template 'app/models/ability.rb'
         template 'app/models/user.rb'
-        template 'app/models/context.rb'
         template 'app/models/permission.rb'
-        template 'app/models/subcontext.rb'
       end
 
       def create_controllers
         template 'app/controllers/manage/application_controller.rb'
-      end
-
-      def create_config
-        template 'config/locales/permissions_enum.ru.yml'
       end
 
       def create_seeds
@@ -38,9 +32,7 @@ module SsoAuth
 
       def create_migrations
         migration_template 'db/migrate/create_users.rb'
-        migration_template 'db/migrate/create_contexts.rb'
         migration_template 'db/migrate/create_permissions.rb'
-        migration_template 'db/migrate/create_subcontexts.rb'
       end
 
     end
