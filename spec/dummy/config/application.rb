@@ -7,7 +7,8 @@ require "action_mailer/railtie"
 require "active_resource/railtie"
 
 Bundler.require
-#require "sso-auth"
+
+require 'devise-russian'
 
 module Dummy
   class Application < Rails::Application
