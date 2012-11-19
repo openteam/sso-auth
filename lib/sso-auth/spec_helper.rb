@@ -8,7 +8,10 @@ module SsoAuth
     def create_user
       @sequence ||= 0
       @sequence += 1
-      User.create! :uid => @sequence, :name => "user #{@sequence}"
+      User.new.tap do |user|
+        user.uid = @sequence
+        user.save(:validate => false)
+      end
     end
 
     def user_with_role(role, context=nil, prefix=nil)
