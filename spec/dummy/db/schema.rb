@@ -26,9 +26,12 @@ ActiveRecord::Schema.define(:version => 20121116124214) do
 
   create_table "users", :force => true do |t|
     t.string   "uid"
-    t.text     "name"
-    t.text     "email"
+    t.string   "name"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
     t.text     "raw_info"
+    t.text     "middle_name"
     t.integer  "sign_in_count"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"

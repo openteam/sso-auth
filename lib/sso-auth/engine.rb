@@ -23,18 +23,22 @@ module SsoAuth
 
     config.to_prepare do
       ActionController::Base.class_eval do
-        define_singleton_method :sso_load_and_authorize_resource do
+        define_singleton_method :sso_authenticate_and_authorize do
           before_filter :authenticate_user!
-          before_filter :authorize_user_can_manage_application!
-          load_and_authorize_resource
+          before_filter :authorize_manage_application!
           rescue_from CanCan::AccessDenied do |exception|
             render :file => "#{Rails.root}/public/403", :formats => [:html], :status => 403, :layout => false
           end
         end
 
+        define_singleton_method :sso_load_and_authorize_resource do
+          sso_authenticate_and_authorize
+          load_and_authorize_resource
+        end
+
         protected
 
-        define_method :authorize_user_can_manage_application! do
+        define_method :authorize_manage_application! do
           authorize! :manage, :application
         end
       end
@@ -55,6 +59,19 @@ module SsoAuth
 
           define_method :sso_auth_name do
             email? ? "#{name} <#{email}>" : name
+          end
+
+          define_singleton_method :find_or_create_by_omniauth_hash do |omniauth_hash|
+            user = User.find_by_uid(omniauth_hash[:uid])
+            user ||= User.find_by_email(omniauth_hash[:info][:email]) if omniauth_hash[:info][:email].present?
+            user ||= User.new { |user| user.uid = omniauth_hash[:uid] }
+            attributes = omniauth_hash[:extra][:raw_info][:user] || {}
+            attributes = attributes.merge(omniauth_hash[:info])
+            attributes.each do |attribute, value|
+              user.send("#{attribute}=", value) if user.respond_to?("#{attribute}=")
+            end
+            user.save(:validate => false)
+            user
           end
         end
 

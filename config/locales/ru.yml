@@ -1,4 +1,8 @@
 ru:
+  sso-auth:
+    provider:
+      title:                  Системы аутентификации
+
   activerecord:
     attributes:
       permission:

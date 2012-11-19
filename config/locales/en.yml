@@ -1,4 +1,8 @@
-ru:
+en:
+  sso-auth:
+    provider:
+      title:                  Identity
+
   activerecord:
     attributes:
       permission:

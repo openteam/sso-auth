@@ -2,17 +2,8 @@
 
 class SsoAuth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def identity
-    user = User.find_or_initialize_by_uid(request.env['omniauth.auth']['uid']).tap do |user|
-      attributes = request.env['omniauth.auth']['extra']['raw_info']['user']
-      attributes = attributes.merge(request.env['omniauth.auth']['info'])
-      attributes.each do |attribute, value|
-        user.send("#{attribute}=", value) if user.respond_to?("#{attribute}=")
-      end
-      user.save(:validate => false)
-    end
-
-    flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "системы аутентификации"
-    sign_in user, :event => :authentication
+    sign_in User.find_or_create_by_omniauth_hash(request.env['omniauth.auth']), :event => :authentication
+    flash[:notice] = I18n.t('devise.omniauth_callbacks.success', :kind => I18n.t('sso-auth.provider.title'))
     redirect_to stored_location_for(:user) || main_app.root_path
   end
 
