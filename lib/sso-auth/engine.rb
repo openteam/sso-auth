@@ -86,7 +86,7 @@ module SsoAuth
           belongs_to :context, :polymorphic => true
           belongs_to :user
 
-          validates_inclusion_of  :role, :in => available_roles
+          validates_inclusion_of  :role, :in => available_roles + available_roles.map(&:to_sym)
           validates_presence_of   :role, :user
           validates_uniqueness_of :role, :scope => [:user_id, :context_id, :context_type]
 
