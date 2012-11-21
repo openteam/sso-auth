@@ -33,6 +33,7 @@ module SsoAuth
 
         define_singleton_method :sso_load_and_authorize_resource do
           sso_authenticate_and_authorize
+          inherit_resources
           load_and_authorize_resource
         end
 
@@ -65,8 +66,10 @@ module SsoAuth
             user = User.find_by_uid(omniauth_hash[:uid])
             user ||= User.find_by_email(omniauth_hash[:info][:email]) if omniauth_hash[:info][:email].present?
             user ||= User.new { |user| user.uid = omniauth_hash[:uid] }
-            attributes = omniauth_hash[:extra][:raw_info][:user] || {}
+            attributes = omniauth_hash[:extra][:raw_info][:user].dup || {}
+            attributes.delete(:uid)
             attributes = attributes.merge(omniauth_hash[:info])
+            attributes[:raw_info] = omniauth_hash[:extra][:raw_info].to_json
             attributes.each do |attribute, value|
               user.send("#{attribute}=", value) if user.respond_to?("#{attribute}=")
             end

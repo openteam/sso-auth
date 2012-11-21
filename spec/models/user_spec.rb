@@ -54,6 +54,7 @@ describe User do
     its(:first_name) { should == 'Firstname' }
     its(:middle_name) { should == 'Middlename' }
     its(:last_name) { should == 'Lastname' }
+    its(:raw_info) { should == { user: { middle_name: middle_name } }.to_json }
 
     context 'user with same uid and another email already exists' do
       before { @user = User.create! :uid => '1', :email => 'there-are-no@mail.here' }
