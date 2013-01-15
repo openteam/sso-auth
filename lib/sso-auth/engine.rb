@@ -65,7 +65,8 @@ module SsoAuth
           define_singleton_method :find_or_create_by_omniauth_hash do |omniauth_hash|
             user = User.find_by_uid(omniauth_hash[:uid])
             user ||= User.find_by_email(omniauth_hash[:info][:email]) if omniauth_hash[:info][:email].present?
-            user ||= User.new { |user| user.uid = omniauth_hash[:uid] }
+            user ||= User.new
+            user.uid = omniauth_hash[:uid]
             attributes = omniauth_hash[:extra][:raw_info][:user].dup || {}
             attributes.delete(:uid)
             attributes = attributes.merge(omniauth_hash[:info])
