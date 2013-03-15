@@ -18,7 +18,7 @@ module SsoAuth
       @roles ||= {}
       @roles["#{prefix}_#{role}"] ||= {}
       @roles["#{prefix}_#{role}"][context] ||= (user || create_user).tap do |user|
-        user.permissions.create! :context => context, :role => role
+        user.permissions.create!({:context => context, :role => role}, :without_protection => true)
       end
     end
 
