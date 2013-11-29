@@ -12,5 +12,6 @@
 #
 
 class Permission < ActiveRecord::Base
+  attr_accessible :role
   sso_auth_permission :roles => [:manager, :operator]
 end

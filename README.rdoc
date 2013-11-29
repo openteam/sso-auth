@@ -6,22 +6,16 @@ Gemfile
 
   gem 'sso-auth'
 
+Run
+  bin/rails g sso:auth:install
+
 Layout
 
   <body>
-    <%= render :partial => "sso_auth/shared/header" %>
+    <%= render :partial => "sso-auth/shared/user_box" %>
     ...
     <%= yield %>
-    ...
-    <%= render :partial => "sso_auth/shared/footer" %>
   </body>
-
-Stylesheet
-
-  *= require ...
-  *= require sso_auth/shared // common styles
-  *= require custom_sso_auth // customize styles
-  */
 
 == License
 

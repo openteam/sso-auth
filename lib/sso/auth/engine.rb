@@ -1,7 +1,7 @@
 module Sso
   module Auth
     class Engine < ::Rails::Engine
-      isolate_namespace SsoAuth
+      isolate_namespace Sso::Auth
 
       config.after_initialize do
         begin
@@ -17,7 +17,7 @@ module Sso
       end
 
       initializer "sso_client.devise", :before => 'devise.omniauth' do |app|
-        require File.expand_path("../../../lib/omniauth/strategies/identity", __FILE__)
+        require File.expand_path("../../../omniauth/strategies/identity", __FILE__)
         Devise.setup do |config|
           config.omniauth :identity, Settings['sso.key'], Settings['sso.secret'], :client_options => { :site => Settings['sso.url'] }
         end
