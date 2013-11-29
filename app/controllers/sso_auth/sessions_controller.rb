@@ -1,4 +1,4 @@
-class SsoAuth::SessionsController < ApplicationController
+class Sso::Auth::SessionsController < ApplicationController
   def destroy
     reset_session
     redirect_to "#{Settings['sso.url']}/users/sign_out?redirect_uri=#{CGI.escape(redirect_uri)}"

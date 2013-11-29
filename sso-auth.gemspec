@@ -1,12 +1,12 @@
 $:.push File.expand_path('../lib', __FILE__)
 
 # Maintain your gem's version:
-require 'sso-auth/version'
+require 'sso/auth/version'
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = 'sso-auth'
-  s.version     = SsoAuth::VERSION
+  s.version     = Sso::Auth::VERSION
   s.authors     = ['http://openteam.ru']
   s.email       = ['mail@openteam.ru']
   s.summary     = 'Summary of SsoAuth.'
@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'cancan'
   s.add_dependency 'configliere'
   s.add_dependency 'devise'
+  s.add_dependency 'devise-russian'
   s.add_dependency 'omniauth'
   s.add_dependency 'omniauth-oauth2'
 
