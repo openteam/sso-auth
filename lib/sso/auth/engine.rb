@@ -64,6 +64,10 @@ module Sso
               email? ? "#{name} <#{email}>" : name
             end
 
+            define_method :after_oauth_authentication do
+              #NOTE: there is your implementation
+            end
+
             define_singleton_method :find_or_create_by_omniauth_hash do |omniauth_hash|
               user = User.find_by_uid(omniauth_hash[:uid])
               user ||= User.find_by_email(omniauth_hash[:info][:email]) if omniauth_hash[:info][:email].present?
@@ -77,6 +81,7 @@ module Sso
                 user.send("#{attribute}=", value) if user.respond_to?("#{attribute}=")
               end
               user.save(:validate => false)
+              user.after_oauth_authentication
               user
             end
           end
