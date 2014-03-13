@@ -84,6 +84,7 @@ module Sso
               user.after_oauth_authentication
               user
             end
+            rewrite_devise_session_methods
           end
 
           def self.sso_auth_permission(options)
@@ -100,6 +101,17 @@ module Sso
 
             scope :for_role,    ->(role)    { where(:role => role) }
             scope :for_context, ->(context) { where(:context_id => context.try(:id), :context_type => context.try(:class)) }
+          end
+
+          define_singleton_method :rewrite_devise_session_methods do
+            def self.serialize_into_session(record)
+              [record.uid, record.authenticatable_salt]
+            end
+
+            def self.serialize_from_session(key, salt)
+              record = find_by(:uid => key)
+              record if record && record.authenticatable_salt == salt
+            end
           end
         end
       end
