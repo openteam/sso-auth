@@ -105,11 +105,11 @@ module Sso
 
           define_singleton_method :rewrite_devise_session_methods do
             def self.serialize_into_session(record)
-              [record.uid, record.authenticatable_salt]
+              [record.uid.to_s, record.authenticatable_salt]
             end
 
             def self.serialize_from_session(key, salt)
-              record = find_by(:uid => key)
+              record = find_by(:uid => key.to_s)
               record if record && record.authenticatable_salt == salt
             end
           end
