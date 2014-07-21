@@ -95,9 +95,8 @@ module Sso
             belongs_to :context, :polymorphic => true
             belongs_to :user
 
-            validates_inclusion_of  :role, :in => available_roles + available_roles.map(&:to_sym)
-            validates_presence_of   :role, :user_id
-            validates_uniqueness_of :role, :scope => [:user_id, :context_id, :context_type]
+            validates_inclusion_of :role, :in => available_roles + available_roles.map(&:to_sym)
+            validates_presence_of  :role
 
             scope :for_role,    ->(role)    { where(:role => role) }
             scope :for_context, ->(context) { where(:context_id => context.try(:id), :context_type => context.try(:class)) }
